@@ -54,7 +54,7 @@ Besides, it is good to have an editor to work with the code like [VSCode](https:
 # Clone this repository
 $ git clone git@github.com:Leandro2585/template-react-clean.git
 
-# Go to server folder
+# Go to project folder
 $ cd template-react-clean
 
 # Install the dependencies
@@ -63,7 +63,7 @@ $ npm install
 # Run the application in development mode
 $ npm run start
 
-# The server will start at port:3000 - access http://localhost:3000 
+# The project will start at port:3000 - access http://localhost:3000 
 
 ```
 

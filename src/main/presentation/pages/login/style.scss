@@ -28,8 +28,15 @@
       text-transform: uppercase;
     }
 
-    button {
+    .submit {
       margin-top: 32px;
+      &:disabled {
+        background-color: $disabledBackground;
+        color: $disabledColor;
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
 
     .link {
