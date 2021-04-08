@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './style.scss'
-import { Footer, FormStatus, Input, LoginHeader } from '@main/presentation/components'
+import { Footer, FormStatus, Input, LoginHeader } from 'presentation/components'
 import FormContext from '../../contexts/FormContext'
-import { Validation } from '@main/presentation/protocols/validation'
+import { Validation } from 'presentation/protocols/validation'
 
 type Props = {
   validation: Validation;
