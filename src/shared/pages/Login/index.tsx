@@ -1,3 +1,4 @@
+import { Authentication } from '@domain/usecases'
 import React, { useEffect, useState } from 'react'
 import { Footer, FormStatus, Input, LoginHeader } from '../../components'
 import FormContext from '../../contexts/FormContext'
@@ -6,9 +7,10 @@ import Styles from './style.scss'
 
 type Props = {
   validation: Validation;
+  authentication: Authentication;
 }
 
-const Login: React.FC<Props> = ({ validation }: Props) => {
+const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -27,9 +29,10 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
     })
   }, [state.email, state.password])
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
     setState({ ...state, isLoading: true })
+    await authentication.auth({ email: state.email, password: state.password })
   }
 
   return (
@@ -44,10 +47,10 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
             data-testid="submit"
             disabled={!!state.emailError || !!state.passwordError}
             type="submit"
-            className={Styles.submit}
-          >Entrar</button>
-          <span className={Styles.link}
-          >Criar conta</span>
+            className={Styles.submit}>
+            Entrar
+          </button>
+          <span className={Styles.link}>Criar conta</span>
           <FormStatus/>
         </form>
       </FormContext.Provider>
