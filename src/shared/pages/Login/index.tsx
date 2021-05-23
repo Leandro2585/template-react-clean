@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styles from './style.scss'
-import { Footer, FormStatus, Input, LoginHeader } from 'presentation/components'
+import { Footer, FormStatus, Input, LoginHeader } from '../../components'
 import FormContext from '../../contexts/FormContext'
-import { Validation } from 'presentation/protocols/validation'
+import { Validation } from '../../protocols/validation'
+import Styles from './style.scss'
 
 type Props = {
   validation: Validation;
@@ -28,15 +28,21 @@ const Login: React.FC<Props> = ({ validation }: Props) => {
   }, [state.email, state.password])
 
   return (
-    <div className={styles.login}>
+    <div className={Styles.login}>
       <LoginHeader/>
       <FormContext.Provider value={{ state, setState }}>
-        <form className={styles.form}>
+        <form className={Styles.form}>
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="Digite seu e-mail"/>
           <Input type="password" name="password" placeholder="Digite sua senha"/>
-          <button data-testid="submit" disabled type="submit" className={styles.submit}>Entrar</button>
-          <span className={styles.link}>Criar conta</span>
+          <button
+            data-testid="submit"
+            disabled={!!state.emailError || !!state.passwordError}
+            type="submit"
+            className={Styles.submit}
+          >Entrar</button>
+          <span className={Styles.link}
+          >Criar conta</span>
           <FormStatus/>
         </form>
       </FormContext.Provider>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { Login } from '../pages'
-import '../global.scss'
+import '../../styles/global.scss'
 
 const Router: React.FC = () => {
   return (

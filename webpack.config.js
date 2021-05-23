@@ -15,7 +15,8 @@ module.exports = {
       '@domain': path.join(__dirname, 'src/domain'),
       '@data': path.join(__dirname, 'src/data'),
       '@infra': path.join(__dirname, 'src/infra'),
-      '@main': path.join(__dirname, 'src/main')
+      '@main': path.join(__dirname, 'src/main'),
+      '@shared': path.join(__dirname, 'src/shared')
     }
   },
   module: {

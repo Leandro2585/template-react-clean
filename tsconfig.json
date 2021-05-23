@@ -9,18 +9,18 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "outDir": "./build",
     "jsx": "react",
     "rootDir": "src",
     "baseUrl": "src",
-    "allowJs": true,
-    "resolveJsonModule": true,
     "paths": {
       "@domain/*": ["domain/*"],
       "@data/*": ["data/*"],
       "@infra/*": ["infra/*"],
       "@main/*": ["main/*"],
-      "@presentation/*": ["presentation/*"],
-    }
-  },
-  "include": ["src"]
+      "@presentation/*": ["presentation/*"]
+    },
+    "allowJs": true,
+    "resolveJsonModule": true
+  }
 }

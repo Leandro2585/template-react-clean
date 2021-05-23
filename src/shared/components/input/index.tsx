@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import styles from './style.scss'
+import Styles from './style.scss'
 import FormContext from '../../contexts/FormContext'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -25,7 +25,7 @@ const Input: React.FC<Props> = ({ ...props }: Props) => {
   const getTitle = (): string => { return error }
 
   return (
-    <div className={styles.inputWrap}>
+    <div className={Styles.inputWrap}>
       <input
         {...props}
         data-testid={props.name}
@@ -33,7 +33,7 @@ const Input: React.FC<Props> = ({ ...props }: Props) => {
         onFocus={enableInput}
         onChange={handleChange}
         />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={styles.status}>{getStatus()}</span>
+      <span data-testid={`${props.name}-status`} title={getTitle()} className={Styles.status}>{getStatus()}</span>
     </div>
   )
 }

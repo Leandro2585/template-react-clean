@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './style.scss'
 
 const Logo: React.FC = () => {
   return (
