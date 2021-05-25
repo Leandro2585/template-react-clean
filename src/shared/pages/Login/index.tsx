@@ -1,5 +1,5 @@
-import { Authentication } from '@domain/usecases'
 import React, { useEffect, useState } from 'react'
+import { Authentication } from '@domain/usecases'
 import { Footer, FormStatus, Input, LoginHeader } from '../../components'
 import FormContext from '../../contexts/FormContext'
 import { Validation } from '../../protocols/validation'
@@ -31,8 +31,14 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault()
+    if (state.isLoading) {
+      return
+    }
     setState({ ...state, isLoading: true })
-    await authentication.auth({ email: state.email, password: state.password })
+    await authentication.auth({
+      email: state.email,
+      password: state.password
+    })
   }
 
   return (
