@@ -1,6 +1,6 @@
-import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react'
 import React from 'react'
 import faker from 'faker'
+import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react'
 import Login from '.'
 import { AuthenticationSpy, ValidationStub } from '../../test'
 
@@ -110,5 +110,12 @@ describe('Login Component', () => {
       email,
       password
     })
+  })
+
+  test('should call Authentication only once', () => {
+    const { sut, authenticationSpy } = makeSut()
+    simulateValidSubmit(sut)
+    simulateValidSubmit(sut)
+    expect(authenticationSpy.callsCount).toBe(1)
   })
 })
