@@ -7,10 +7,10 @@ module.exports = {
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   transform: {
-    '.+\\.ts|tsx$': 'ts-jest'
+    '.+\\.(ts|tsx)$': 'ts-jest'
   },
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/src/',
-    '\\.scss': 'identity-obj-proxy'
+    '.+\\.scss': 'identity-obj-proxy'
   })
 }

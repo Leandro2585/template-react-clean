@@ -11,8 +11,8 @@
     "moduleResolution": "node",
     "outDir": "./build",
     "jsx": "react",
-    "rootDir": "src",
-    "baseUrl": "src",
+    "rootDir": ".",
+    "baseUrl": "./src",
     "paths": {
       "@domain/*": ["domain/*"],
       "@data/*": ["data/*"],

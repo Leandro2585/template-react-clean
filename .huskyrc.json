@@ -1,5 +1,4 @@
 {
   "hooks": {
-    "pre-push": "yarn test:ci"
   }
 }
