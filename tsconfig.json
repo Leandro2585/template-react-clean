@@ -18,7 +18,7 @@
       "@data/*": ["data/*"],
       "@infra/*": ["infra/*"],
       "@main/*": ["main/*"],
-      "@presentation/*": ["presentation/*"]
+      "@shared/*": ["shared/*"]
     },
     "allowJs": true,
     "resolveJsonModule": true

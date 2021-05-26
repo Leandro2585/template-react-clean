@@ -2,7 +2,7 @@ import React from 'react'
 import faker from 'faker'
 import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
 import Login from '.'
-import { AuthenticationSpy, ValidationStub } from '../../test'
+import { AuthenticationSpy, ValidationStub } from '@shared/test'
 import { InvalidCredentialsError } from '@domain/errors'
 
 type SutTypes = {
