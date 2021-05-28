@@ -18,7 +18,8 @@
       "@data/*": ["data/*"],
       "@infra/*": ["infra/*"],
       "@main/*": ["main/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@validation/*": ["validation/*"]
     },
     "allowJs": true,
     "resolveJsonModule": true
