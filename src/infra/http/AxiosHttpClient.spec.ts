@@ -8,7 +8,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>
 
 const mockedAxiosResult = {
   data: faker.random.objectElement(),
-  status: faker.random.number()
+  status: faker.datatype.number()
 }
 mockedAxios.post.mockResolvedValue(mockedAxiosResult)
 

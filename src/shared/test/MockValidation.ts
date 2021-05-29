@@ -1,4 +1,4 @@
-import { Validation } from '../protocols/validation'
+import { Validation } from '@shared/protocols'
 
 export class ValidationStub implements Validation {
   errorMessage: string;

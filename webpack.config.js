@@ -16,7 +16,8 @@ module.exports = {
       '@data': path.join(__dirname, 'src/data'),
       '@infra': path.join(__dirname, 'src/infra'),
       '@main': path.join(__dirname, 'src/main'),
-      '@shared': path.join(__dirname, 'src/shared')
+      '@shared': path.join(__dirname, 'src/shared'),
+      '@validation': path.join(__dirname, 'src/validation')
     }
   },
   module: {
@@ -33,13 +34,13 @@ module.exports = {
             loader: 'style-loader'
           },
           {
-            loader: 'css-loader',
-            options: {
-              modules: true
-            }
+            loader: 'css-loader'
           },
           {
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
           }
         ]
       }
