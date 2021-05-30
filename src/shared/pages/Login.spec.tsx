@@ -163,6 +163,18 @@ describe('Login Component', () => {
     expect(history.location.pathname).toBe('/')
   })
 
+  test('should present error if SaveAccessToken fails', async () => {
+    const { sut, saveAccessTokenMock } = makeSut()
+    const error = new InvalidCredentialsError()
+    jest.spyOn(saveAccessTokenMock, 'save').mockReturnValueOnce(Promise.reject(error))
+    simulateValidSubmit(sut)
+    const errorWrap = sut.getByTestId('error-wrap')
+    await waitFor(() => errorWrap)
+    const mainError = sut.getByTestId('main-error')
+    expect(mainError.textContent).toBe(error.message)
+    expect(errorWrap.childElementCount).toBe(1)
+  })
+
   test('should go to signup page', async () => {
     const { sut } = makeSut()
     const createAccount = sut.getByTestId('create-account')
