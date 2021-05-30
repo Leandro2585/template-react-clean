@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Authentication } from '@domain/usecases'
 import { FormContext } from '@shared/contexts'
-import { Validation } from '@shared/protocols/Validation'
+import { Validation } from '@shared/protocols'
 import { Footer, FormStatus, Input, LoginHeader } from '@shared/components'
-import * as Styles from '@shared/styles/login.scss'
+import Styles from '@shared/styles/login.scss'
 
 type Props = {
   validation: Validation;

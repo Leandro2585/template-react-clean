@@ -1,5 +1,5 @@
 import { Validation } from '@shared/protocols'
-import { FieldValidation } from '@validation/protocols/FieldValidation'
+import { FieldValidation } from '@validation/protocols'
 
 export class ValidationComposite implements Validation {
   private constructor (private readonly validators: FieldValidation[]) {}

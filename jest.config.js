@@ -3,7 +3,12 @@ const { compilerOptions } = require('./tsconfig.json')
 
 module.exports = {
   roots: ['<rootDir>/src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!**/*.d.ts'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/src/main/**/*',
+    '!<rootDir>/src/shared/router/**/*',
+    '!**/*.d.ts'
+  ],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
   transform: {

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
 import faker from 'faker'
 import 'jest-localstorage-mock'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
-import Login from './Login'
-import { AuthenticationSpy, ValidationStub } from '@shared/test'
 import { InvalidCredentialsError } from '@domain/errors'
+import { AuthenticationSpy, ValidationStub } from '@shared/test'
+import { Login } from '@shared/pages'
 
 type SutTypes = {
   sut: RenderResult;
