@@ -1,1 +1,2 @@
-export * from './MockHttpPostClientSpy'
+export * from './MockHttpClient'
+export * from './MockHttpPost'
