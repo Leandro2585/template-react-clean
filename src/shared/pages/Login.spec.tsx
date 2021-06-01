@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
 import { InvalidCredentialsError } from '@domain/errors'
-import { AuthenticationSpy, ValidationStub, SaveAccessTokenMock } from '@shared/test'
+import { AuthenticationSpy, ValidationStub, SaveAccessTokenMock, FormHelper } from '@shared/test'
 import { Login } from '@shared/pages'
 
 type SutTypes = {
@@ -67,26 +67,25 @@ describe('Login Component', () => {
   test('should start with initial state', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    const errorWrap = sut.getByTestId('error-wrap')
-    expect(errorWrap.childElementCount).toBe(0)
+    FormHelper.testChildCount(sut, 'error-wrap', 0)
     const submitButton = sut.getByTestId('submit') as HTMLButtonElement
     expect(submitButton.disabled).toBe(true)
-    simulateStatusForField(sut, 'email', validationError)
-    simulateStatusForField(sut, 'password', validationError)
+    FormHelper.testStatusForField(sut, 'email', validationError)
+    FormHelper.testStatusForField(sut, 'password', validationError)
   })
 
   test('should show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populateEmailField(sut)
-    simulateStatusForField(sut, 'email', validationError)
+    FormHelper.testStatusForField(sut, 'email', validationError)
   })
 
   test('should show password error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populatePasswordField(sut)
-    simulateStatusForField(sut, 'password', validationError)
+    FormHelper.testStatusForField(sut, 'password', validationError)
   })
 
   test('should show valid email state if Validation succeeds', () => {
@@ -151,7 +150,7 @@ describe('Login Component', () => {
     await waitFor(() => errorWrap)
     const mainError = sut.getByTestId('main-error')
     expect(mainError.textContent).toBe(error.message)
-    expect(errorWrap.childElementCount).toBe(1)
+    FormHelper.testChildCount(sut, 'error-wrap', 1)
   })
 
   test('should call SaveAccessToken on success', async () => {
@@ -172,7 +171,7 @@ describe('Login Component', () => {
     await waitFor(() => errorWrap)
     const mainError = sut.getByTestId('main-error')
     expect(mainError.textContent).toBe(error.message)
-    expect(errorWrap.childElementCount).toBe(1)
+    FormHelper.testChildCount(sut, 'error-wrap', 1)
   })
 
   test('should go to signup page', async () => {
