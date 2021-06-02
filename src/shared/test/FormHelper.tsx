@@ -1,4 +1,5 @@
-import { RenderResult } from '@testing-library/react'
+import faker from 'faker'
+import { fireEvent, RenderResult } from '@testing-library/react'
 
 export const testChildCount = (sut: RenderResult, field: string, count: number): void => {
   const errorWrap = sut.getByTestId(field)
@@ -14,4 +15,9 @@ export const testStatusForField = (sut: RenderResult, fieldName: string, validat
   const fieldStatus = sut.getByTestId(`${fieldName}-status`)
   expect(fieldStatus.title).toBe(validationError || 'Tudo certo')
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🔵')
+}
+
+export const populateField = (sut: RenderResult, fieldName: string, value = faker.random.word()) => {
+  const input = sut.getByTestId(fieldName)
+  fireEvent.input(input, { target: { value } })
 }

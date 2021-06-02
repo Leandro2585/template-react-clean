@@ -45,19 +45,9 @@ const simulateStatusForField = (sut: RenderResult, fieldName: string, validation
   expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🔵')
 }
 
-const populateEmailField = (sut: RenderResult, email = faker.internet.email()): void => {
-  const emailInput = sut.getByTestId('email')
-  fireEvent.input(emailInput, { target: { value: email } })
-}
-
-const populatePasswordField = (sut: RenderResult, password = faker.internet.password()): void => {
-  const passwordInput = sut.getByTestId('password')
-  fireEvent.input(passwordInput, { target: { value: password } })
-}
-
 const simulateValidSubmit = (sut: RenderResult, email = faker.internet.email(), password = faker.internet.password()): void => {
-  populateEmailField(sut, email)
-  populatePasswordField(sut, password)
+  FormHelper.populateField(sut, 'email', email)
+  FormHelper.populateField(sut, 'password', password)
   const submitButton = sut.getByTestId('submit')
   fireEvent.click(submitButton)
 }
@@ -77,33 +67,33 @@ describe('Login Component', () => {
   test('should show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populateEmailField(sut)
+    FormHelper.populateField(sut, 'email')
     FormHelper.testStatusForField(sut, 'email', validationError)
   })
 
   test('should show password error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
-    populatePasswordField(sut)
+    FormHelper.populateField(sut, 'password')
     FormHelper.testStatusForField(sut, 'password', validationError)
   })
 
   test('should show valid email state if Validation succeeds', () => {
     const { sut } = makeSut()
-    populateEmailField(sut)
+    FormHelper.populateField(sut, 'email')
     simulateStatusForField(sut, 'email')
   })
 
   test('should show valid password state if Validation succeeds', () => {
     const { sut } = makeSut()
-    populatePasswordField(sut)
+    FormHelper.populateField(sut, 'password')
     simulateStatusForField(sut, 'password')
   })
 
   test('should enable submit button if form is valid', () => {
     const { sut } = makeSut()
-    populateEmailField(sut)
-    populatePasswordField(sut)
+    FormHelper.populateField(sut, 'email')
+    FormHelper.populateField(sut, 'password')
     const submitButton = sut.getByTestId('submit') as HTMLButtonElement
     expect(submitButton.disabled).toBe(false)
   })
@@ -136,7 +126,7 @@ describe('Login Component', () => {
   test('should not call Authentication if form is invalid', () => {
     const validationError = faker.random.words()
     const { sut, authenticationSpy } = makeSut({ validationError })
-    populateEmailField(sut)
+    FormHelper.populateField(sut, 'email')
     fireEvent.submit(sut.getByTestId('form'))
     expect(authenticationSpy.callsCount).toBe(0)
   })
