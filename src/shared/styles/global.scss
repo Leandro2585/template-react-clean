@@ -1,3 +1,4 @@
+@import './colors.scss';
 * {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -22,3 +23,18 @@ input[type="text"] {
   }
 }
 
+button {
+  background-color: $primary;
+  line-height: 60px;
+  color: $white;
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  &:disabled {
+    background-color: $disabledBackground;
+    color: $disabledColor;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
