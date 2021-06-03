@@ -11,7 +11,7 @@ export const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDis
   expect(button.disabled).toBe(isDisabled)
 }
 
-export const testStatusForField = (sut: RenderResult, fieldName: string, validationError: string) => {
+export const testStatusForField = (sut: RenderResult, fieldName: string, validationError: string = '') => {
   const fieldStatus = sut.getByTestId(`${fieldName}-status`)
   expect(fieldStatus.title).toBe(validationError || 'Tudo certo')
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🔵')
