@@ -122,11 +122,13 @@ describe('SignUp Component', () => {
     const email = faker.internet.email()
     const password = faker.internet.password()
     await simulateValidSubmit(sut, name, email, password)
-    expect(addAccountSpy.params).toEqual({
-      name,
-      email,
-      password,
-      confirmPassword: password
-    })
+    expect(addAccountSpy.params).toEqual({ name, email, password, confirmPassword: password })
+  })
+
+  test('should call AddAccount only once', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    await simulateValidSubmit(sut)
+    await simulateValidSubmit(sut)
+    expect(addAccountSpy.callsCount).toBe(1)
   })
 })
