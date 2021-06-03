@@ -1,9 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from '@shared/router/index.routes'
-import { makeLogin } from '@main/factories/pages/LoginFactory'
+import { makeLogin, makeSignUp } from '@main/factories/pages'
 
 ReactDOM.render(
-  <Router makeLogin={makeLogin}/>,
+  <Router
+    makeLogin={makeLogin}
+    makeSignUp={makeSignUp}
+  />,
   document.getElementById('main')
 )

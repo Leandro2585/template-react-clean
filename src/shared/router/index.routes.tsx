@@ -1,18 +1,18 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import '@shared/styles/global.scss'
-import { SignUp } from '@shared/pages'
 
-type Props = {
+type Factory = {
   makeLogin: React.FC;
+  makeSignUp: React.FC;
 }
 
-const Router: React.FC<Props> = ({ makeLogin }: Props) => {
+const Router: React.FC<Factory> = (factory: Factory) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={makeLogin}/>
-        <Route path="/signup" component={SignUp}/>
+        <Route path="/login" component={factory.makeLogin}/>
+        <Route path="/signup" component={factory.makeSignUp}/>
       </Switch>
     </BrowserRouter>
   )

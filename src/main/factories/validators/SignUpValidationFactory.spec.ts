@@ -8,7 +8,7 @@ describe('SignUpValidationFactory', () => {
       ...ValidationBuilder.field('name').required().build(),
       ...ValidationBuilder.field('email').required().email().build(),
       ...ValidationBuilder.field('password').required().min(6).build(),
-      ...ValidationBuilder.field('confirmPassword').required().sameAs('confirmPassword').min(6).build()
+      ...ValidationBuilder.field('confirmPassword').required().min(6).sameAs('password').build()
     ]))
   })
 })
