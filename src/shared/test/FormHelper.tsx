@@ -26,3 +26,8 @@ export const populateField = (sut: RenderResult, fieldName: string, value = fake
   const input = sut.getByTestId(fieldName)
   fireEvent.input(input, { target: { value } })
 }
+
+export const testElementText = (sut: RenderResult, fieldName: string, text: string) => {
+  const element = sut.getByTestId(fieldName)
+  expect(element.textContent).toBe(text)
+}

@@ -32,11 +32,7 @@ const makeSut = (params?: SutParams): SutTypes => {
       />
     </Router>
   )
-  return {
-    sut,
-    authenticationSpy,
-    saveAccessTokenMock
-  }
+  return { sut, authenticationSpy, saveAccessTokenMock }
 }
 
 const simulateStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
@@ -59,8 +55,7 @@ describe('Login Component', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     FormHelper.testChildCount(sut, 'error-wrap', 0)
-    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(true)
+    FormHelper.testButtonIsDisabled(sut, 'submit', true)
     FormHelper.testStatusForField(sut, 'email', validationError)
     FormHelper.testStatusForField(sut, 'password', validationError)
   })
@@ -109,10 +104,7 @@ describe('Login Component', () => {
     const email = faker.internet.email()
     const password = faker.internet.password()
     simulateValidSubmit(sut, email, password)
-    expect(authenticationSpy.params).toEqual({
-      email,
-      password
-    })
+    expect(authenticationSpy.params).toEqual({ email, password })
   })
 
   test('should call Authentication only once', () => {
@@ -122,23 +114,21 @@ describe('Login Component', () => {
     expect(authenticationSpy.callsCount).toBe(1)
   })
 
-  test('should not call Authentication if form is invalid', () => {
+  test('should not call Authentication if form is invalid', async () => {
     const validationError = faker.random.words()
     const { sut, authenticationSpy } = makeSut({ validationError })
-    FormHelper.populateField(sut, 'email')
-    fireEvent.submit(sut.getByTestId('form'))
+    await simulateValidSubmit(sut)
     expect(authenticationSpy.callsCount).toBe(0)
   })
 
   test('should present error if Authentication fails', async () => {
     const { sut, authenticationSpy } = makeSut()
     const error = new InvalidCredentialsError()
-    jest.spyOn(authenticationSpy, 'auth').mockReturnValueOnce(Promise.reject(error))
+    jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error)
     simulateValidSubmit(sut)
     const errorWrap = sut.getByTestId('error-wrap')
     await waitFor(() => errorWrap)
-    const mainError = sut.getByTestId('main-error')
-    expect(mainError.textContent).toBe(error.message)
+    FormHelper.testElementText(sut, 'main-error', error.message)
     FormHelper.testChildCount(sut, 'error-wrap', 1)
   })
 
@@ -158,8 +148,7 @@ describe('Login Component', () => {
     simulateValidSubmit(sut)
     const errorWrap = sut.getByTestId('error-wrap')
     await waitFor(() => errorWrap)
-    const mainError = sut.getByTestId('main-error')
-    expect(mainError.textContent).toBe(error.message)
+    FormHelper.testElementText(sut, 'main-error', error.message)
     FormHelper.testChildCount(sut, 'error-wrap', 1)
   })
 
