@@ -168,4 +168,13 @@ describe('SignUp Component', () => {
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })
+
+  test('should present error if SaveAccessToken fails', async () => {
+    const { sut, addAccountSpy, saveAccessTokenMock } = makeSut()
+    const error = new EmailInUseError()
+    jest.spyOn(saveAccessTokenMock, 'save').mockRejectedValueOnce(error)
+    await simulateValidSubmit(sut)
+    FormHelper.testElementText(sut, 'main-error', error.message)
+    FormHelper.testChildCount(sut, 'error-wrap', 1)
+  })
 })
