@@ -94,8 +94,7 @@ describe('Login Component', () => {
     const { sut } = makeSut()
     FormHelper.populateField(sut, 'email')
     FormHelper.populateField(sut, 'password')
-    const submitButton = sut.getByTestId('submit') as HTMLButtonElement
-    expect(submitButton.disabled).toBe(false)
+    FormHelper.testButtonIsDisabled(sut, 'submit', false)
   })
 
   test('should show spinner on submit', () => {
