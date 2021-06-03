@@ -14,10 +14,11 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     nameError: '',
     emailError: '',
     passwordError: '',
-    confirmPasswordError: 'Campo obrigatório',
+    confirmPasswordError: '',
     mainError: ''
   })
 
@@ -26,32 +27,22 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
       ...state,
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password)
+      passwordError: validation.validate('password', state.password),
+      confirmPasswordError: validation.validate('confirmPassword', state.confirmPassword)
     })
-  }, [state.name, state.email, state.password])
+  }, [state.name, state.email, state.password, state.confirmPassword])
+
   return (
     <div className={Styles.signup}>
       <LoginHeader/>
       <FormContext.Provider value={{ state, setState }}>
         <form className={Styles.form}>
           <h2>Sign Up</h2>
-          <Input type="text" name="text" placeholder="Digite seu nome"/>
-          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-          />
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirme sua senha"
-          />
-          <button
-            disabled
-            data-testid="submit"
-            type="submit"
-            className={Styles.submit}>
+          <Input type="text" name="text" placeholder="Digite seu nome" />
+          <Input type="email" name="email" placeholder="Digite seu e-mail" />
+          <Input type="password" name="password" placeholder="Digite sua senha" />
+          <Input type="password" name="confirmPassword" placeholder="Confirme sua senha" />
+          <button disabled data-testid="submit" type="submit" className={Styles.submit}>
             Cadastrar
           </button>
           <span className={Styles.link}>Ir para login</span>
