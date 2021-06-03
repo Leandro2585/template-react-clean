@@ -17,6 +17,11 @@ export const testStatusForField = (sut: RenderResult, fieldName: string, validat
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🔵')
 }
 
+export const testElementExists = (sut: RenderResult, fieldName: string): void => {
+  const element = sut.getByTestId(fieldName)
+  expect(element).toBeTruthy()
+}
+
 export const populateField = (sut: RenderResult, fieldName: string, value = faker.random.word()) => {
   const input = sut.getByTestId(fieldName)
   fireEvent.input(input, { target: { value } })

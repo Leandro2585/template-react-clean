@@ -45,11 +45,12 @@ const simulateStatusForField = (sut: RenderResult, fieldName: string, validation
   expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🔵')
 }
 
-const simulateValidSubmit = (sut: RenderResult, email = faker.internet.email(), password = faker.internet.password()): void => {
+const simulateValidSubmit = async (sut: RenderResult, email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   FormHelper.populateField(sut, 'email', email)
   FormHelper.populateField(sut, 'password', password)
-  const submitButton = sut.getByTestId('submit')
-  fireEvent.click(submitButton)
+  const form = sut.getByTestId('form')
+  fireEvent.submit(form)
+  await waitFor(() => form)
 }
 
 describe('Login Component', () => {
@@ -100,8 +101,7 @@ describe('Login Component', () => {
   test('should show spinner on submit', () => {
     const { sut } = makeSut()
     simulateValidSubmit(sut)
-    const spinner = sut.getByTestId('spinner')
-    expect(spinner).toBeTruthy()
+    FormHelper.testElementExists(sut, 'spinner')
   })
 
   test('should call Authentication with correct values', () => {
