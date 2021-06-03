@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { Footer, FormStatus, Input, LoginHeader } from '@shared/components'
 import { FormContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
@@ -75,7 +75,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
           <button disabled={!!state.nameError || !!state.emailError || !!state.confirmPasswordError || !!state.confirmPasswordError} data-testid="submit" type="submit" className={Styles.submit}>
             Cadastrar
           </button>
-          <span className={Styles.link}>Ir para login</span>
+          <Link data-testid="login-link" to="/login" className={Styles.link} replace>Voltar para login</Link>
           <FormStatus/>
         </form>
       </FormContext.Provider>
