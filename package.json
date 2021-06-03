@@ -9,6 +9,7 @@
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test --watch",
     "test:staged": "yarn test --findRelatedTests",
+    "test:cypress": "cypress open",
     "test:ci": "yarn test -- --coverage"
   },
   "devDependencies": {
