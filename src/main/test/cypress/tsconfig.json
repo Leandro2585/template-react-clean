@@ -4,6 +4,7 @@
     "./*/*.ts"
   ],
   "compilerOptions": {
-    "types": ["cypress"]
+    "types": ["cypress"],
+    "esModuleInterop": true
   }
 }
