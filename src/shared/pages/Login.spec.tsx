@@ -35,12 +35,6 @@ const makeSut = (params?: SutParams): SutTypes => {
   return { sut, authenticationSpy, saveAccessTokenMock }
 }
 
-const simulateStatusForField = (sut: RenderResult, fieldName: string, validationError?: string): void => {
-  const emailStatus = sut.getByTestId(`${fieldName}-status`)
-  expect(emailStatus.title).toBe(validationError || 'Tudo certo')
-  expect(emailStatus.textContent).toBe(validationError ? '🔴' : '🔵')
-}
-
 const simulateValidSubmit = async (sut: RenderResult, email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   FormHelper.populateField(sut, 'email', email)
   FormHelper.populateField(sut, 'password', password)
@@ -77,13 +71,13 @@ describe('Login Component', () => {
   test('should show valid email state if Validation succeeds', () => {
     const { sut } = makeSut()
     FormHelper.populateField(sut, 'email')
-    simulateStatusForField(sut, 'email')
+    FormHelper.testStatusForField(sut, 'email')
   })
 
   test('should show valid password state if Validation succeeds', () => {
     const { sut } = makeSut()
     FormHelper.populateField(sut, 'password')
-    simulateStatusForField(sut, 'password')
+    FormHelper.testStatusForField(sut, 'password')
   })
 
   test('should enable submit button if form is valid', () => {
