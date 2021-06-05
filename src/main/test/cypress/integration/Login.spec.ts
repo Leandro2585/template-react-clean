@@ -107,8 +107,8 @@ describe('Login', () => {
         accessToken: faker.datatype.uuid()
       }
     })
-    cy.getByTestId('email').focus().type('leo.real2585@gmail.com')
-    cy.getByTestId('password').focus().type('123456')
+    cy.getByTestId('email').focus().type(faker.internet.email())
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(6))
     cy.getByTestId('submit').click()
     cy.getByTestId('spinner').should('exist')
     cy.getByTestId('main-error').should('not.exist')
