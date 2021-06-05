@@ -1,5 +1,15 @@
 import faker from 'faker'
+import * as Http from '../support/SignUpMocks'
 import * as FormHelper from '../support/FormHelper'
+
+const simulateValidSubmit = (): void => {
+  cy.getByTestId('name').focus().type(faker.name.findName())
+  cy.getByTestId('email').focus().type(faker.internet.email())
+  const password = faker.random.alphaNumeric(6)
+  cy.getByTestId('password').focus().type(password)
+  cy.getByTestId('confirmPassword').focus().type(password)
+  cy.getByTestId('submit').click()
+}
 
 describe('SignUp', () => {
   beforeEach(() => {
@@ -8,26 +18,26 @@ describe('SignUp', () => {
 
   it('should load with correct initial state', () => {
     cy.getByTestId('name').should('have.attr', 'readOnly')
-    FormHelper.testInputStatus('name', 'Campo obrigatório')
+    FormHelper.testInputStatus('name', 'Required field')
     cy.getByTestId('email').should('have.attr', 'readOnly')
-    FormHelper.testInputStatus('email', 'Campo obrigatório')
+    FormHelper.testInputStatus('email', 'Required field')
     cy.getByTestId('password').should('have.attr', 'readOnly')
-    FormHelper.testInputStatus('password', 'Campo obrigatório')
+    FormHelper.testInputStatus('password', 'Required field')
     cy.getByTestId('confirmPassword').should('have.attr', 'readOnly')
-    FormHelper.testInputStatus('confirmPassword', 'Campo obrigatório')
+    FormHelper.testInputStatus('confirmPassword', 'Required field')
     cy.getByTestId('submit').should('have.attr', 'disabled')
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
 
   it('should present error state if form is invalid', () => {
     cy.getByTestId('name').focus().type(faker.name.findName())
-    FormHelper.testInputStatus('name', 'Valor do campo inválido')
+    FormHelper.testInputStatus('name', 'Invalid field value')
     cy.getByTestId('email').focus().type(faker.random.word())
-    FormHelper.testInputStatus('email', 'Valor do campo inválido')
+    FormHelper.testInputStatus('email', 'Invalid field value')
     cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5))
-    FormHelper.testInputStatus('password', 'Valor do campo inválido')
+    FormHelper.testInputStatus('password', 'Invalid field value')
     cy.getByTestId('confirmPassword').focus().type(faker.random.alphaNumeric(4))
-    FormHelper.testInputStatus('confirmPassword', 'Valor do campo inválido')
+    FormHelper.testInputStatus('confirmPassword', 'Invalid field value')
     cy.getByTestId('submit').should('have.attr', 'disabled')
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
@@ -44,5 +54,12 @@ describe('SignUp', () => {
     FormHelper.testInputStatus('confirmPassword')
     cy.getByTestId('submit').should('not.have.attr', 'disabled')
     cy.getByTestId('error-wrap').should('not.have.descendants')
+  })
+
+  it('should present EmailInUseError on 403', () => {
+    Http.mockEmailInUseError()
+    simulateValidSubmit()
+    FormHelper.testMainError('E-mail already in use')
+    FormHelper.testUrl('/signup')
   })
 })
