@@ -1,3 +1,4 @@
+import faker from 'faker'
 import * as FormHelper from '../support/FormHelper'
 
 describe('SignUp', () => {
@@ -14,6 +15,19 @@ describe('SignUp', () => {
     FormHelper.testInputStatus('password', 'Campo obrigatório')
     cy.getByTestId('confirmPassword').should('have.attr', 'readOnly')
     FormHelper.testInputStatus('confirmPassword', 'Campo obrigatório')
+    cy.getByTestId('submit').should('have.attr', 'disabled')
+    cy.getByTestId('error-wrap').should('not.have.descendants')
+  })
+
+  it('should present error state if form is invalid', () => {
+    cy.getByTestId('name').focus().type(faker.name.findName())
+    FormHelper.testInputStatus('name', 'Valor do campo inválido')
+    cy.getByTestId('email').focus().type(faker.random.word())
+    FormHelper.testInputStatus('email', 'Valor do campo inválido')
+    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5))
+    FormHelper.testInputStatus('password', 'Valor do campo inválido')
+    cy.getByTestId('confirmPassword').focus().type(faker.random.alphaNumeric(4))
+    FormHelper.testInputStatus('confirmPassword', 'Valor do campo inválido')
     cy.getByTestId('submit').should('have.attr', 'disabled')
     cy.getByTestId('error-wrap').should('not.have.descendants')
   })
