@@ -12,9 +12,12 @@ export const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDis
 }
 
 export const testStatusForField = (sut: RenderResult, fieldName: string, validationError: string = '') => {
-  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
-  expect(fieldStatus.title).toBe(validationError || 'Tudo certo')
-  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🔵')
+  const wrap = sut.getByTestId(`${fieldName}-wrap`)
+  const field = sut.getByTestId(`${fieldName}`)
+  const label = sut.getByTestId(`${fieldName}-label`)
+  expect(wrap.getAttribute('data-status')).toBe(validationError ? 'invalid' : 'valid')
+  expect(field.title).toBe(validationError)
+  expect(label.title).toBe(validationError)
 }
 
 export const testElementExists = (sut: RenderResult, fieldName: string): void => {
