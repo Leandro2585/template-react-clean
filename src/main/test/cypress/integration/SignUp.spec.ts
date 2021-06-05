@@ -69,4 +69,11 @@ describe('SignUp', () => {
     FormHelper.testMainError('Something wrong happened. Try again soon.')
     FormHelper.testUrl('/signup')
   })
+
+  it('should present UnexpectedError if invalid data is returned', () => {
+    Http.mockInvalidData()
+    simulateValidSubmit()
+    FormHelper.testMainError('Something wrong happened. Try again soon.')
+    FormHelper.testUrl('/signup')
+  })
 })
