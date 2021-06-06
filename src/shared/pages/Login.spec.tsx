@@ -38,9 +38,8 @@ const makeSut = (params?: SutParams): SutTypes => {
 const simulateValidSubmit = async (sut: RenderResult, email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   FormHelper.populateField(sut, 'email', email)
   FormHelper.populateField(sut, 'password', password)
-  const form = sut.getByTestId('form')
-  fireEvent.submit(form)
-  await waitFor(() => form)
+  const submit = sut.getByTestId('submit')
+  fireEvent.click(submit)
 }
 
 describe('Login Component', () => {

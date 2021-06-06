@@ -2,10 +2,10 @@ import React from 'react'
 import faker from 'faker'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
-import SignUp from './SignUp'
-import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render, RenderResult, waitFor, screen } from '@testing-library/react'
 import { FormHelper, ValidationStub, AddAccountSpy, SaveAccessTokenMock } from '@shared/test'
 import { EmailInUseError } from '@domain/errors'
+import SignUp from './SignUp'
 
 type SutTypes = {
   sut: RenderResult;
@@ -44,7 +44,7 @@ const simulateValidSubmit = async (sut: RenderResult, name = faker.name.findName
   FormHelper.populateField(sut, 'email', email)
   FormHelper.populateField(sut, 'password', password)
   FormHelper.populateField(sut, 'confirmPassword', password)
-  const form = sut.getByTestId('form')
+  const form = screen.getByTestId('form')
   fireEvent.submit(form)
   await waitFor(() => form)
 }
@@ -53,7 +53,7 @@ describe('SignUp Component', () => {
   afterEach(cleanup)
   test('should start with initial state', () => {
     const validationError = faker.random.words()
-    const { sut } = makeSut()
+    const { sut } = makeSut({ validationError })
     FormHelper.testChildCount(sut, 'error-wrap', 0)
     FormHelper.testButtonIsDisabled(sut, 'submit', true)
     FormHelper.testStatusForField(sut, 'name', validationError)
@@ -133,9 +133,14 @@ describe('SignUp Component', () => {
     const { sut, addAccountSpy } = makeSut()
     const name = faker.name.findName()
     const email = faker.internet.email()
-    const password = faker.internet.password()
+    const password = faker.internet.password(6)
     await simulateValidSubmit(sut, name, email, password)
-    expect(addAccountSpy.params).toEqual({ name, email, password, confirmPassword: password })
+    expect(addAccountSpy.params).toEqual({
+      name,
+      email,
+      password,
+      confirmPassword: password
+    })
   })
 
   test('should call AddAccount only once', async () => {

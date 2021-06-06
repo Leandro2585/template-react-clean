@@ -44,7 +44,6 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
       isFormInvalid: !!nameError || !!emailError || !!passwordError || !!confirmPasswordError
     })
   }, [state.name, state.email, state.password, state.confirmPassword])
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -76,7 +75,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
       <FormContext.Provider value={{ state, setState }}>
         <form onSubmit={handleSubmit} data-testid="form" className={Styles.form}>
           <h2>Sign Up</h2>
-          <Input type="text" name="text" placeholder="Digite seu nome" />
+          <Input type="text" name="name" placeholder="Digite seu nome" />
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
           <Input type="password" name="confirmPassword" placeholder="Confirme sua senha" />
