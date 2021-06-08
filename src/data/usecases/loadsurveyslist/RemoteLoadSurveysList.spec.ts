@@ -4,6 +4,7 @@ import { RemoteLoadSurveysList } from './RemoteLoadSurveysList'
 import { HttpStatusCode } from '@data/protocols/http'
 import { UnexpectedError } from '@domain/errors'
 import { SurveyModel } from '@domain/models'
+import { mockSurveysListModel } from '@domain/test'
 
 type SutTypes = {
   sut: RemoteLoadSurveysList;
@@ -63,5 +64,14 @@ describe('RemoteLoadSurveysList', () => {
     }
     const surveys = await sut.loadAll()
     expect(surveys).toEqual(httpResult)
+  })
+
+  test('should return an empty list if HttpGetClient returns 204', async () => {
+    const { sut, httpGetClientSpy } = makeSut()
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.noContent
+    }
+    const surveys = await sut.loadAll()
+    expect(surveys).toEqual([])
   })
 })
