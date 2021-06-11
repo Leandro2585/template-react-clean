@@ -20,6 +20,7 @@ const SurveyList: React.FC = () => {
             </div>
             <Footer/>
           </li>
+          <li></li>
         </ul>
       </div>
     </div>
