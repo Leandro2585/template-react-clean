@@ -6,7 +6,6 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  
   .contentWrap {
     display: flex;
     flex-direction: column;
@@ -77,6 +76,7 @@
           p {
             font-size: 18px;
             margin: 24px;
+            flex-grow: 1;
             align-self: center;
           }
         }
@@ -91,6 +91,20 @@
           &:hover {
             background-color: $primaryDark;
           } 
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .surveyListWrap {
+    .contentWrap {
+      ul {
+        flex-direction: column;
+
+        li {
+          flex-basis: 100%;
         }
       }
     }
