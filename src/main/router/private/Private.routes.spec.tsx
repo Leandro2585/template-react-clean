@@ -13,7 +13,10 @@ type SutTypes = {
 const makeSut = (account = mockAccountModel()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
   render(
-    <ApiContext.Provider value={{ getCurrentAccount: () => account }}>
+    <ApiContext.Provider value={{
+      getCurrentAccount: () => account,
+      setCurrentAccount: () => null
+    }}>
       <Router history={history}>
         <PrivateRoute/>
       </Router>
@@ -24,7 +27,7 @@ const makeSut = (account = mockAccountModel()): SutTypes => {
 
 describe('PrivateRoute', () => {
   test('should redirect to /login if token is empty', () => {
-    const { history } = makeSut()
+    const { history } = makeSut(null)
     expect(history.location.pathname).toBe('/login')
   })
 

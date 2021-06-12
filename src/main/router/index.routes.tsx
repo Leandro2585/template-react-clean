@@ -1,9 +1,9 @@
 import '@shared/styles/global.scss'
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import PrivateRoute from '@main/router/private/Private.routes'
 import { setCurrentAccountAdapter, getCurrentAccountAdapter } from '@main/adapters'
 import { makeLogin, makeSignUp } from '@main/factories/pages'
-import { PrivateRoute } from '@main/router/private'
 import { ApiContext } from '@shared/contexts'
 import { SurveyList } from '@shared/pages'
 
