@@ -16,6 +16,7 @@ export const mockAddAccountParams = (): AddAccount.Params => {
   }
 }
 
-export const mockAccountModel = (): Authentication.Result => ({
+export const mockAccountModel = (): Authentication.Model => ({
+  name: faker.name.findName(),
   accessToken: faker.datatype.uuid()
 })

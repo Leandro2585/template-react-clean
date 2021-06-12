@@ -3,16 +3,16 @@ import { useHistory, Link } from 'react-router-dom'
 import { Footer, FormStatus, Input, LoginHeader, SubmitButton } from '@shared/components'
 import { FormContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
-import { AddAccount, SaveAccessToken } from '@domain/usecases'
+import { AddAccount, UpdateCurrentAccount } from '@domain/usecases'
 import Styles from '@shared/styles/signup.scss'
 
 type Props = {
   validation: Validation;
   addAccount: AddAccount;
-  saveAccessToken: SaveAccessToken;
+  updateCurrentAccount: UpdateCurrentAccount;
 }
 
-const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Props) => {
+const SignUp: React.FC<Props> = ({ validation, addAccount, updateCurrentAccount }: Props) => {
   const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
@@ -58,7 +58,7 @@ const SignUp: React.FC<Props> = ({ validation, addAccount, saveAccessToken }: Pr
         confirmPassword: state.confirmPassword
       })
 
-      await saveAccessToken.save(account.accessToken)
+      await updateCurrentAccount.save(account)
       history.replace('/')
     } catch (error) {
       setState({

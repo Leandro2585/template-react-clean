@@ -14,5 +14,8 @@ export const mockInvalidData = (): void => {
 }
 
 export const mockOk = (): void => {
-  return Helper.mockOk(/signup/, 'POST', { accessToken: faker.datatype.uuid() })
+  return Helper.mockOk(/signup/, 'POST', {
+    name: faker.name.findName(),
+    accessToken: faker.datatype.uuid()
+  })
 }

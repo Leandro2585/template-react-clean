@@ -1,5 +1,5 @@
 export * from './MockAddAccount'
 export * from './MockValidation'
 export * from './MockAuthentication'
-export * from './MockSaveAccessToken'
+export * from './MockUpdateCurrentAccount'
 export * as FormHelper from './FormHelper'
