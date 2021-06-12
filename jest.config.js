@@ -8,6 +8,7 @@ module.exports = {
     '!<rootDir>/src/main/**/*',
     '!**/*.d.ts'
   ],
+  setupFilesAfterEnv: ['<rootDir>/src/main/config/JestSetup.ts'],
   coverageDirectory: 'coverage',
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',

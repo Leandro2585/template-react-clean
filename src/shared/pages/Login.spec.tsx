@@ -8,6 +8,7 @@ import { InvalidCredentialsError } from '@domain/errors'
 import { AuthenticationSpy, ValidationStub, FormHelper } from '@shared/test'
 import { Login } from '@shared/pages'
 import { AccountModel } from '@domain/models'
+import { mockAccountModel } from '@domain/test'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy;
@@ -48,8 +49,8 @@ describe('Login Component', () => {
   test('should start with initial state', () => {
     const validationError = faker.random.words()
     makeSut({ validationError })
-    FormHelper.testChildCount('error-wrap', 0)
-    FormHelper.testButtonIsDisabled('submit', true)
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
+    expect(screen.getByTestId('submit')).toBeDisabled()
     FormHelper.testStatusForField('email', validationError)
     FormHelper.testStatusForField('password', validationError)
   })
@@ -84,13 +85,13 @@ describe('Login Component', () => {
     makeSut()
     FormHelper.populateField('email')
     FormHelper.populateField('password')
-    FormHelper.testButtonIsDisabled('submit', false)
+    expect(screen.getByTestId('submit')).toBeEnabled()
   })
 
   test('should show spinner on submit', async () => {
     makeSut()
     await simulateValidSubmit()
-    FormHelper.testElementExists('spinner')
+    expect(screen.queryByTestId('spinner')).toBeInTheDocument()
   })
 
   test('should call Authentication with correct values', async () => {
@@ -122,14 +123,14 @@ describe('Login Component', () => {
     await simulateValidSubmit()
     const errorWrap = screen.getByTestId('error-wrap')
     await waitFor(() => errorWrap)
-    FormHelper.testElementText('main-error', error.message)
-    FormHelper.testChildCount('error-wrap', 1)
+    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
   })
 
   test('should call SetCurrentAccount on success', async () => {
     const { authenticationSpy, setCurrentAccountMock } = makeSut()
     await simulateValidSubmit()
-    expect(setCurrentAccountMock).toHaveBeenCalledWith(authenticationSpy.account)
+    expect(setCurrentAccountMock(mockAccountModel())).toHaveBeenCalledWith(authenticationSpy.account)
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })

@@ -23,7 +23,7 @@ describe('CurrentAccountAdapter', () => {
     const account = mockAccountModel()
     const getSpy = jest.spyOn(LocalStorageAdapter.prototype, 'get').mockReturnValueOnce(account)
     const result = getCurrentAccountAdapter()
-    expect(getSpy).toHaveBeenCalledWith(account)
+    expect(getSpy).toHaveBeenCalledWith('@Devs:account')
     expect(result).toEqual(account)
   })
 })
