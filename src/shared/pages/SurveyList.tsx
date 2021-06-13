@@ -9,17 +9,7 @@ const SurveyList: React.FC = () => {
       <div className={Styles.contentWrap}>
         <h2>Enquetes</h2>
         <ul>
-          <li>
-            <div className={Styles.surveyContent}>
-              <time>
-                <span className={Styles.day}>09</span>
-                <span className={Styles.month}>03</span>
-                <span className={Styles.year}>2021</span>
-              </time>
-              <p>Qual é sua linguagem de programação preferida?</p>
-            </div>
-            <Footer/>
-          </li>
+
           <li></li>
         </ul>
       </div>
