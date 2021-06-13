@@ -21,21 +21,5 @@
       text-transform: uppercase;
       margin-bottom: 40px;
     }
-    ul {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: row;
-      justify-content: space-between;
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .surveyListWrap {
-    .contentWrap {
-      ul {
-        flex-direction: column;
-      }
-    }
   }
 }

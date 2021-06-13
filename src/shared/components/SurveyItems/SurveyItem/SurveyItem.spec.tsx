@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { SurveyItem } from './'
 import { mockSurveyModel } from '@domain/test'
+import SurveyItem from '.'
 
 const makeSut = (survey = mockSurveyModel()): void => {
   render(<SurveyItem survey={survey}/>)

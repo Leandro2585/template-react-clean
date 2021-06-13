@@ -1,7 +1,6 @@
 import React from 'react'
 import { SurveyModel } from '@domain/models'
-import { Footer } from '..'
-import SurveyItemEmpty from './SurveyItemEmpty'
+import { Footer } from '../..'
 import Styles from './style.scss'
 
 type Props = {
@@ -47,4 +46,4 @@ const SurveyItem: React.FC<Props> = ({ survey }: Props) => {
   )
 }
 
-export { SurveyItem, SurveyItemEmpty }
+export default SurveyItem
