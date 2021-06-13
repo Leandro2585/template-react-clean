@@ -16,7 +16,12 @@ const SurveyItem: React.FC<Props> = ({ survey }: Props) => {
           <span
             data-testid="day"
             className={Styles.day}>
-            {survey.date.getDate()}
+            {
+              survey.date
+                .getDate()
+                .toString()
+                .padStart(2, '0')
+            }
           </span>
           <span
             data-testid="month"

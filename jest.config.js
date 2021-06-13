@@ -16,8 +16,7 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.ts?$': 'ts-jest',
-    '.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
     '^.+\\.scss$': 'jest-scss-transform'
   },
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
