@@ -1,6 +1,6 @@
 import React from 'react'
 import Styles from '@shared/styles/surveylist.scss'
-import { Footer, Header } from '@shared/components'
+import { Header, SurveyItemEmpty } from '@shared/components'
 
 const SurveyList: React.FC = () => {
   return (
@@ -9,8 +9,7 @@ const SurveyList: React.FC = () => {
       <div className={Styles.contentWrap}>
         <h2>Enquetes</h2>
         <ul>
-
-          <li></li>
+          <SurveyItemEmpty/>
         </ul>
       </div>
     </div>

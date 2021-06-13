@@ -1,5 +1,6 @@
 import React from 'react'
 import { Footer } from '..'
+import SurveyItemEmpty from './SurveyItemEmpty'
 import Styles from './style.scss'
 
 const SurveyItem: React.FC = () => {
@@ -18,4 +19,4 @@ const SurveyItem: React.FC = () => {
   )
 }
 
-export default SurveyItem
+export { SurveyItem, SurveyItemEmpty }
