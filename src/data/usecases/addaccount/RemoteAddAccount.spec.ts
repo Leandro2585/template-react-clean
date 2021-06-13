@@ -24,14 +24,14 @@ describe('RemoteAddAccount', () => {
   test('should call HttpPostClient with correct URL', async () => {
     const url = faker.internet.url()
     const { sut, httpPostClientSpy } = makeSut(url)
-    sut.create(mockAddAccountParams())
+    await sut.create(mockAddAccountParams())
     expect(httpPostClientSpy.url).toBe(url)
   })
 
   test('should call HttpPostClient with correct body', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     const addAccountParams = mockAddAccountParams()
-    sut.create(addAccountParams)
+    await sut.create(addAccountParams)
     expect(httpPostClientSpy.body).toEqual(addAccountParams)
   })
 
