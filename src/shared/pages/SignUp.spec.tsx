@@ -7,7 +7,7 @@ import { FormHelper, ValidationStub, AddAccountSpy } from '@shared/test'
 import { ApiContext } from '@shared/contexts'
 import { EmailInUseError } from '@domain/errors'
 import { AccountModel } from '@domain/models'
-import SignUp from './SignUp'
+import { SignUp } from '@shared/pages'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy;
