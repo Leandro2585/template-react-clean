@@ -8,7 +8,7 @@ import {
 } from '@data/protocols/http'
 import faker from 'faker'
 
-export class HttpPostClientSpy<Body, Response> implements HttpPostClient<Body, Response> {
+export class HttpPostClientSpy<Body = any, Response = any> implements HttpPostClient<Body, Response> {
   url?: string;
 
   body?: Body;
@@ -24,14 +24,16 @@ export class HttpPostClientSpy<Body, Response> implements HttpPostClient<Body, R
   }
 }
 
-export class HttpGetClientSpy<Response> implements HttpGetClient<Response> {
+export class HttpGetClientSpy<Response = any> implements HttpGetClient<Response> {
   url: string;
+  headers?: any;
   response: HttpResponse<Response> = {
     statusCode: HttpStatusCode.ok
-  }
+  };
 
   async get (params: HttpGetParams): Promise<HttpResponse<Response>> {
     this.url = params.url
+    this.headers = params.headers
     return this.response
   }
 }
