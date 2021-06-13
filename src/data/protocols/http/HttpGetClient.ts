@@ -2,6 +2,7 @@ import { HttpResponse } from './HttpResponse'
 
 export type HttpGetParams = {
   url: string;
+  headers?: any;
 }
 
 export interface HttpGetClient<Response = any> {
