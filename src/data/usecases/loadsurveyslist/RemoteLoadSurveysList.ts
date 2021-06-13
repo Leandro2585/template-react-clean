@@ -9,7 +9,7 @@ export class RemoteLoadSurveysList implements LoadSurveysList {
     private readonly httpGetClient: HttpGetClient<SurveyModel[]>
   ) {}
 
-  async loadAll (): Promise<SurveyModel[]> {
+  async loadAll (): Promise<LoadSurveysList.Model> {
     const httpResponse = await this.httpGetClient.get({ url: this.url })
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return httpResponse.body

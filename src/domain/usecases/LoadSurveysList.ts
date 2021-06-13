@@ -1,9 +1,9 @@
 import { SurveyModel } from '@domain/models'
 
 export interface LoadSurveysList {
-  loadAll(): Promise<LoadSurveysList.Result>;
+  loadAll(): Promise<LoadSurveysList.Model>;
 }
 
 export namespace LoadSurveysList {
-  export type Result = SurveyModel[];
+  export type Model = SurveyModel[];
 }
