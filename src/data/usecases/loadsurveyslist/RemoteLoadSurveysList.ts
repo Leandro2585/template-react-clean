@@ -1,6 +1,6 @@
 import { HttpGetClient, HttpStatusCode } from '@data/protocols/http'
 import { LoadSurveysList } from '@domain/usecases'
-import { UnexpectedError } from '@domain/errors'
+import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { SurveyModel } from '@domain/models'
 
 export class RemoteLoadSurveysList implements LoadSurveysList {
@@ -14,6 +14,7 @@ export class RemoteLoadSurveysList implements LoadSurveysList {
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return httpResponse.body
       case HttpStatusCode.noContent: return []
+      case HttpStatusCode.forbidden: throw new AccessDeniedError()
       default: throw new UnexpectedError()
     }
   }
