@@ -5,7 +5,7 @@ import { Logo } from '@shared/components'
 import Styles from './style.scss'
 
 const Header: React.FC = () => {
-  const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount, getCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
   const logout = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     event.preventDefault()
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <div className={Styles.headerContent}>
         <Logo/>
         <div className={Styles.logoutWrap}>
-          <span>Leandro</span>
+          <span data-testid="username">{getCurrentAccount().name}</span>
           <a data-testid="logout" onClick={logout} href="#">Sair</a>
         </div>
       </div>
