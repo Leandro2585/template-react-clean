@@ -5,7 +5,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { SurveyList } from '@shared/pages'
 import { LoadSurveysList } from '@domain/usecases'
 import { mockAccountModel, mockSurveysListModel } from '@domain/test'
-import { UnexpectedError } from '@domain/errors'
+import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { ApiContext } from '@shared/contexts'
 import { AccountModel } from '@domain/models'
 
