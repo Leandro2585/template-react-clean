@@ -25,7 +25,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/jest-dom"
   ],
   "exclude": [
     "./src/main/test/cypress"
