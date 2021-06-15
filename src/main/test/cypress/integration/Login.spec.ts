@@ -1,7 +1,21 @@
 import faker from 'faker'
-import * as Http from '../support/LoginMocks'
-import * as FormHelper from '../support/FormHelper'
-import * as Helpers from '../support/Helpers'
+import * as Http from '../utils/HttpMocks'
+import * as FormHelper from '../utils/FormHelper'
+import * as Helpers from '../utils/Helpers'
+
+const path = /login/
+
+const mockInvalidCredentialsError = (): void => {
+  return Http.mockUnauthorizedError(path)
+}
+
+const mockUnexpectedError = (): void => {
+  return Http.mockServerError(path, 'POST')
+}
+
+const mockOk = (): void => {
+  return Http.mockOk(path, 'POST', 'fx:account')
+}
 
 const populateFields = (): void => {
   cy.getByTestId('email').focus().type(faker.internet.email())
@@ -46,7 +60,7 @@ describe('Login', () => {
   })
 
   it('should present InvalidCredentialsError on 401', () => {
-    Http.mockInvalidCredentialsError()
+    mockInvalidCredentialsError()
     simulateValidSubmit()
     cy.getByTestId('error-wrap')
     FormHelper.testMainError('Invalid credentials')
@@ -54,14 +68,14 @@ describe('Login', () => {
   })
 
   it('should present UnexpectedError on default error cases', () => {
-    Http.mockUnexpectedError()
+    mockUnexpectedError()
     simulateValidSubmit()
     FormHelper.testMainError('Something wrong happened. Try again soon.')
     Helpers.testUrl('/login')
   })
 
   it('should present save account if valid credentials are provided', () => {
-    Http.mockOk()
+    mockOk()
     simulateValidSubmit()
     cy.getByTestId('error-wrap').should('not.have.descendants')
     Helpers.testUrl('/')
@@ -69,14 +83,14 @@ describe('Login', () => {
   })
 
   it('should prevent multiple submits', () => {
-    Http.mockOk()
+    mockOk()
     populateFields()
     cy.getByTestId('submit').dblclick()
     Helpers.testHttpCallsCount(1)
   })
 
   it('should not call submit if form is invalid', () => {
-    Http.mockOk()
+    mockOk()
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
     Helpers.testHttpCallsCount(0)
   })
