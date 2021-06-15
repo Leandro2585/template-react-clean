@@ -31,7 +31,7 @@
   &:focus-within {
     border-color: transparent;
     label {
-      transform: scale(0.8) translateY(-32px);
+      transform: scale(0.8) translateY(-24px);
     }
     &::after {
       transform: scaleX(1);
@@ -41,13 +41,13 @@
     display: block;
     line-height: 24px;
     padding: 0px 40px 0px 8px;
-
     &:not(:placeholder-shown) + label {
-      transform: scale(0.8) translateY(-32px);
+      transform: scale(0.8) translateY(-24px);
     }
   }
   label {
     position: absolute;
+    top: 0px;
     left: 8px;
     color: $disabledColor;
     cursor: text;
@@ -58,7 +58,7 @@
   .status {
     position: absolute;
     right: 8px;
-    font-size: 10px;
+    font-size: 12px;
     cursor: help;
   }
 }

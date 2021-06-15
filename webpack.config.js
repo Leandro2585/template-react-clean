@@ -30,24 +30,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options: {
+            modules: true
           }
-        ]
+        }, {
+          loader: 'sass-loader'
+        }]
       }
     ]
   },
   devServer: {
+    port: 8080,
     contentBase: './public',
     writeToDisk: true,
     historyApiFallback: true

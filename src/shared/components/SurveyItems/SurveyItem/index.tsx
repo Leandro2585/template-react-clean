@@ -1,6 +1,6 @@
 import React from 'react'
 import { SurveyModel } from '@domain/models'
-import { Footer } from '../..'
+import { Footer } from '@shared/components'
 import Styles from './style.scss'
 
 type Props = {

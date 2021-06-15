@@ -8,7 +8,6 @@ import { InvalidCredentialsError } from '@domain/errors'
 import { AuthenticationSpy, ValidationStub, FormHelper } from '@shared/test'
 import { Login } from '@shared/pages'
 import { AccountModel } from '@domain/models'
-import { mockAccountModel } from '@domain/test'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy;

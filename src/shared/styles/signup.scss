@@ -5,43 +5,32 @@
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
-
-  .signupWrap {
+  .form {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    justify-content: space-between;
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      width: 400px;
-      background-color: $white;
-      padding: 40px;
-      border-radius: 8px;
-      align-self: center;
-      box-shadow: 0px 1px 3px -1px $black;
-      h2 {
-        color: $black;
-        text-align: center;
-        font-size: 20px;
-        text-transform: uppercase;
-      }
-      button {
-        margin-top: 32px;
-      }
-      .link {
-        text-align: center;
-        color: $primaryDark;
-        text-transform: lowercase;
-        margin-top: 16px;
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
-        }
+    width: 400px;
+    background-color: $white;
+    padding: 40px;
+    border-radius: 8px;
+    align-self: center;
+    box-shadow: 0px 1px 3px -1px $black;
+    h2 {
+      color: $black;
+      text-align: center;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+    button {
+      margin-top: 32px;
+    }
+    .link {
+      text-align: center;
+      color: $primaryDark;
+      margin-top: 16px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
-
 }
-
