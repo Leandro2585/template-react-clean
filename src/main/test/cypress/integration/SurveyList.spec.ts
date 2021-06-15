@@ -10,6 +10,6 @@ describe('SurveyList', () => {
   it('should present error on UnexpectedError', () => {
     Http.mockUnexpectedError()
     cy.visit('')
-    Helper.testUrl('/login')
+    cy.getByTestId('error').should('container.text', 'Something wrong happened. Try again soon.')
   })
 })
