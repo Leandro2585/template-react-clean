@@ -46,7 +46,7 @@ describe('SurveyList Component', () => {
   test('should present 4 empty items on start', async () => {
     makeSut()
     const surveyList = screen.getByTestId('survey-list')
-    expect(surveyList.querySelectorAll('li:empty').length).toHaveLength(4)
+    expect(surveyList.querySelectorAll('li:empty').length).toBe(4)
     expect(screen.queryByTestId('error')).not.toBeInTheDocument()
     await waitFor(() => surveyList)
   })
@@ -61,7 +61,7 @@ describe('SurveyList Component', () => {
     makeSut()
     const surveyList = screen.getByTestId('survey-list')
     await waitFor(() => surveyList)
-    expect(surveyList.querySelectorAll('li.surveyItemWrap').length).toHaveLength(3)
+    expect(surveyList.querySelectorAll('li').length).toBe(4)
     expect(screen.queryByTestId('error')).not.toBeInTheDocument()
   })
 

@@ -123,14 +123,14 @@ describe('Login Component', () => {
     await simulateValidSubmit()
     const errorWrap = screen.getByTestId('error-wrap')
     await waitFor(() => errorWrap)
-    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message)
+    expect(screen.getByTestId('main-error').textContent).toBe(error.message)
     expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
   })
 
   test('should call SetCurrentAccount on success', async () => {
     const { authenticationSpy, setCurrentAccountMock } = makeSut()
     await simulateValidSubmit()
-    expect(setCurrentAccountMock(mockAccountModel())).toHaveBeenCalledWith(authenticationSpy.account)
+    expect(setCurrentAccountMock).toHaveBeenCalledWith(authenticationSpy.account)
     expect(history.length).toBe(1)
     expect(history.location.pathname).toBe('/')
   })

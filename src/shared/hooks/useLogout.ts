@@ -9,6 +9,6 @@ export const useLogout = (): ResultType => {
   const { setCurrentAccount } = useContext(ApiContext)
   return (): void => {
     setCurrentAccount(undefined)
-    history.replace('/')
+    history.replace('/login')
   }
 }
