@@ -12,4 +12,10 @@ describe('SurveyList', () => {
     cy.visit('')
     cy.getByTestId('error').should('container.text', 'Something wrong happened. Try again soon.')
   })
+
+  it('should present error on UnexpectedError', () => {
+    Http.mockAccessDeniedError()
+    cy.visit('')
+    Helper.testUrl('/login')
+  })
 })
