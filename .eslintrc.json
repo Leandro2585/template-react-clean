@@ -35,6 +35,7 @@
 		"no-useless-constructor": "off",
 		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
-		"no-redeclare": "off"
+		"no-redeclare": "off",
+		"node/no-path-concat": "off"
 	}
 }
