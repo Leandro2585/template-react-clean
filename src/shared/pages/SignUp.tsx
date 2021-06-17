@@ -28,22 +28,18 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
     mainError: ''
   })
 
-  useEffect(() => {
+  useEffect(() => validate('name'), [state.name])
+  useEffect(() => validate('email'), [state.email])
+  useEffect(() => validate('password'), [state.password])
+  useEffect(() => validate('confirmPassword'), [state.confirmPassword])
+
+  const validate = (field: string): void => {
     const { name, email, password, confirmPassword } = state
     const formData = { name, email, password, confirmPassword }
-    const nameError = validation.validate('name', formData)
-    const emailError = validation.validate('email', formData)
-    const passwordError = validation.validate('password', formData)
-    const confirmPasswordError = validation.validate('confirmPassword', formData)
-    setState({
-      ...state,
-      nameError,
-      emailError,
-      passwordError,
-      confirmPasswordError,
-      isFormInvalid: !!nameError || !!emailError || !!passwordError || !!confirmPasswordError
-    })
-  }, [state.name, state.email, state.password, state.confirmPassword])
+    setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, formData) }))
+    setState(old => ({ ...old, isFormInvalid: !!old.nameError || !!old.emailError || !!old.passwordError || !!old.confirmPasswordError }))
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
