@@ -5,7 +5,8 @@
   "author": "Leandro2585 <leo.real2585@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
@@ -55,6 +56,7 @@
     "jest-localstorage-mock": "^2.4.13",
     "jest-scss-transform": "^1.0.1",
     "lint-staged": "^10.5.1",
+    "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
