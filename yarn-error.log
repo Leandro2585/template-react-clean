@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add express express-history-api-fallback
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add -D @types/node
 
 PATH: 
   /home/leandro/.zinit/polaris/sbin:/home/leandro/.zinit/polaris/bin:/home/leandro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -24,11 +24,12 @@ Trace:
 npm manifest: 
   {
     "name": "web",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "main": "index.js",
     "author": "Leandro2585 <leo.real2585@gmail.com>",
     "license": "MIT",
     "scripts": {
+      "start": "node index",
       "dev": "webpack-dev-server --open --config webpack.dev.js",
       "build": "webpack --config webpack.prod.js",
       "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --passWithNoTests --no-cache --runInBand",
@@ -94,6 +95,8 @@ npm manifest:
     },
     "dependencies": {
       "axios": "^0.21.0",
+      "express": "^4.17.1",
+      "express-history-api-fallback": "^2.2.1",
       "react": "^17.0.1",
       "react-dom": "^17.0.1",
       "react-router-dom": "^5.2.0"
@@ -3443,6 +3446,11 @@ Lockfile:
       jest-matcher-utils "^27.0.1"
       jest-message-util "^27.0.1"
       jest-regex-util "^27.0.1"
+  
+  express-history-api-fallback@^2.2.1:
+    version "2.2.1"
+    resolved "https://registry.yarnpkg.com/express-history-api-fallback/-/express-history-api-fallback-2.2.1.tgz#3a2ad27f7bebc90fc533d110d7c6d83097bcd057"
+    integrity sha1-OirSf3vryQ/FM9EQ18bYMJe80Fc=
   
   express@^4.17.1:
     version "4.17.1"
