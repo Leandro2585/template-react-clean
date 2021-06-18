@@ -38,7 +38,7 @@ module.exports = merge(common, {
       'process.env.API_URL': JSON.stringify('http://localhost:3333/api')
     }),
     new HtmlWebpackPlugin({
-      template: './template.dev.html'
+      template: '../templates/template.dev.html'
     })
   ]
 })

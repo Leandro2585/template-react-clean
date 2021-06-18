@@ -39,7 +39,7 @@ module.exports = merge(common, {
       'process.env.API_URL': JSON.stringify('https://fordevs.herokuapp.com/api')
     }),
     new HtmlWebpackPlugin({
-      template: './template.prod.html'
+      template: '../templates/template.prod.html'
     }),
     new MiniCSSExtractPlugin({
       filename: 'main-bundle-[hash].css'
