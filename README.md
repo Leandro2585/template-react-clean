@@ -1,5 +1,5 @@
 <p align="center">
-  [![Known Vulnerabilities](https://snyk.io/test/github/Leandro2585/template-clean-react/badge.svg)](https://snyk.io/test/github/Leandro2585/template-react-clean)
+  <img src="https://snyk.io/test/github/Leandro2585/template-clean-react/badge.svg"/>
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Leandro2585/template-react-clean?color=%2304D361">
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/Leandro2585/template-react-clean">
