@@ -36,6 +36,7 @@
 		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
 		"no-redeclare": "off",
-		"node/no-path-concat": "off"
+		"node/no-path-concat": "off",
+		"import/export": "off"
 	}
 }
