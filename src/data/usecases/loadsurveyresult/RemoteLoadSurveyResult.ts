@@ -5,10 +5,10 @@ import { LoadSurveyResult } from '@domain/usecases'
 export class RemoteLoadSurveyResult implements LoadSurveyResult {
   constructor (
     private readonly url: string,
-    private readonly httpGetClient: HttpGetClient
+    private readonly httpGetClient: HttpGetClient<RemoteLoadSurveyResult.Model>
   ) {}
 
-  async load (): Promise<RemoteLoadSurveyResult.Model> {
+  async load (): Promise<LoadSurveyResult.Model> {
     const httpResponse = await this.httpGetClient.get({ url: this.url })
     const remoteSurveyResult = httpResponse.body
     switch (httpResponse.statusCode) {
@@ -22,12 +22,13 @@ export class RemoteLoadSurveyResult implements LoadSurveyResult {
 export namespace RemoteLoadSurveyResult {
   export type Model = {
     question: string;
-    date: Date;
+    date: string;
     answers: Array<{
       image?: string;
       answer: string;
       count: number;
       percent: number;
+      isCurrentAccountAnswer: boolean;
     }>
   }
 }
