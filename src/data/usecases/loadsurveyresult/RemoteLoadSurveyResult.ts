@@ -7,6 +7,6 @@ export class RemoteLoadSurveyResult {
   ) {}
 
   async load (): Promise<void> {
-
+    await this.httpGetClient.get({ url: this.url })
   }
 }
