@@ -2,7 +2,7 @@ import React from 'react'
 import faker from 'faker'
 import { fireEvent, render, RenderResult } from '@testing-library/react'
 import { FormContext } from '@shared/contexts'
-import Input from '.'
+import { Input } from '@shared/components'
 
 const makeSut = (fieldName: string): RenderResult => {
   return render(

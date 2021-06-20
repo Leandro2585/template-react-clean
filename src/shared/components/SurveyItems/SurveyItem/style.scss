@@ -22,30 +22,9 @@
       linear-gradient(to right, $white, $white);
     background-position: 0 0, 55 0;
     background-size: 54px 100%, 100% 100%;
-    time {
-      display: flex;
-      flex-direction: column;
-      background-color: $primaryLight;
-      color: $white;
-      border-radius: 8px;
+    .calendarWrap {
       margin-left: 24px;
       align-self: center;
-      justify-content: center;
-      width: 64px;
-      height: 100px;
-      align-items: center;
-      flex-shrink: 0;
-      .day {
-        font-size: 40px;
-        font-weight: bold;
-      }
-      .month {
-        text-transform: lowercase;
-        margin: 0px 0px 6px;
-      }
-      .year {
-        font-size: 16px;
-      }
     }
     p {
       font-size: 18px;
