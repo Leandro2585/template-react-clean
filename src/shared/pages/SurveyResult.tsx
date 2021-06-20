@@ -6,8 +6,11 @@ import Styles from '@shared/styles/surveyresult.scss'
 const SurveyResult: React.FC = () => {
   return (
     <div className={Styles.surveyResultWrap}>
+
       <Header/>
       <div className={Styles.contentWrap}>
+      { false &&
+      <>
         <hgroup>
           <Calendar date={new Date()} className={Styles.calendarWrap}/>
           <h2>Qual é seu framework web favorito</h2>
@@ -21,6 +24,7 @@ const SurveyResult: React.FC = () => {
         </FlipMove>
         <button>Voltar</button>
         { false && <Loading/>}
+      </>}
       </div>
     </div>
   )
