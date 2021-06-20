@@ -25,6 +25,7 @@ button {
   font-size: 16px;
   border: none;
   padding: 0px 16px;
+  outline: none;
   &:disabled {
     background-color: $disabledBackground;
     color: $disabledColor;
