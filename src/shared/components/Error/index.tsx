@@ -2,17 +2,16 @@ import React, { useContext } from 'react'
 import { SurveyContext } from '@shared/contexts'
 import Styles from './style.scss'
 
-const SurveyError: React.FC = () => {
-  const { state, setState } = useContext(SurveyContext)
+type Props = {
+  error: string;
+  reload(): void;
+}
 
-  const reload = (): void => {
-    setState({ surveys: [], error: '', reload: !state.reload })
-  }
-
+const SurveyError: React.FC<Props> = ({ error, reload }: Props) => {
   return (
     <div className={Styles.errorWrap}>
       <span data-testid="error">
-        {state.error}
+        {error}
       </span>
       <button data-testid="reload" onClick={reload}>Tentar novamente</button>
     </div>
