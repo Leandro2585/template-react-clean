@@ -1,6 +1,6 @@
 import React from 'react'
 import FlipMove from 'react-flip-move'
-import { Header, Spinner } from '@shared/components'
+import { Header, Loading } from '@shared/components'
 import Styles from '@shared/styles/surveyresult.scss'
 
 const SurveyResult: React.FC = () => {
@@ -17,12 +17,7 @@ const SurveyResult: React.FC = () => {
           </li>
         </FlipMove>
         <button>Voltar</button>
-      </div>
-      <div className={Styles.loadingWrap}>
-        <div className={Styles.loading}>
-          <span>Aguarde...</span>
-          <Spinner isNegative/>
-        </div>
+        { false && <Loading/>}
       </div>
     </div>
   )
