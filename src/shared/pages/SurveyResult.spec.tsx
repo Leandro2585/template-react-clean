@@ -2,14 +2,15 @@ import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { SurveyResult } from '@shared/pages'
 import { ApiContext } from '@shared/contexts'
-import { LoadSurveyResultSpy, mockAccountModel } from '@domain/test'
+import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@domain/test'
 
 type SutTypes = {
   loadSurveyResultSpy: LoadSurveyResultSpy;
 }
 
-const makeSut = (): SutTypes => {
+const makeSut = (surveyResult = mockSurveyResultModel()): SutTypes => {
   const loadSurveyResultSpy = new LoadSurveyResultSpy()
+  loadSurveyResultSpy.surveyResult = surveyResult
   render(
     <ApiContext.Provider value={{ setCurrentAccount: jest.fn(), getCurrentAccount: () => mockAccountModel() }}>
         <SurveyResult loadSurveyResult={loadSurveyResultSpy}/>
@@ -35,5 +36,27 @@ describe('SurveyResult Component', () => {
     const { loadSurveyResultSpy } = makeSut()
     await waitFor(() => screen.getByTestId('survey-result'))
     expect(loadSurveyResultSpy.callsCount).toBe(1)
+  })
+
+  test('should present SurveyResult data on success', async () => {
+    const surveyResult = Object.assign(mockSurveyResultModel(), {
+      date: new Date('2021-01-10T00:00:00')
+    })
+    makeSut(surveyResult)
+    await waitFor(() => screen.getByTestId('survey-result'))
+    expect(screen.getByTestId('day')).toHaveTextContent('10')
+    expect(screen.getByTestId('month')).toHaveTextContent('jan')
+    expect(screen.getByTestId('year')).toHaveTextContent('2021')
+    expect(screen.getByTestId('question')).toHaveTextContent(surveyResult.question)
+    expect(screen.getByTestId('answers').childElementCount).toBe(1)
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    expect(answersWrap[0]).toHaveClass('active')
+    const images = screen.queryAllByTestId('image')
+    expect(images[0]).toHaveAttribute('src', surveyResult.answers[0].image)
+    expect(images[0]).toHaveAttribute('alt', surveyResult.answers[0].image)
+    const answers = screen.queryAllByTestId('answer')
+    expect(answers[0]).toHaveTextContent(surveyResult.answers[0].answer)
+    const percents = screen.queryAllByTestId('percent')
+    expect(percents[0]).toHaveTextContent(`${surveyResult.answers[0].percent}%`)
   })
 })
