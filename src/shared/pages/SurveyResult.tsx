@@ -3,22 +3,33 @@ import FlipMove from 'react-flip-move'
 import { LoadSurveyResult } from '@domain/usecases'
 import { Calendar, Header, Loading, Error } from '@shared/components'
 import Styles from '@shared/styles/surveyresult.scss'
+import { useErrorHandler } from '@shared/hooks'
 
 type Props = {
   loadSurveyResult: LoadSurveyResult;
 }
 
+type State = {
+  isLoading: boolean;
+  error: string;
+  surveyResult: LoadSurveyResult.Model;
+}
+
 const SurveyResult: React.FC<Props> = ({ loadSurveyResult }: Props) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<State>({
     isLoading: false,
     error: '',
     surveyResult: null as LoadSurveyResult.Model
   })
 
+  const handleError = useErrorHandler((error: Error)  => {
+    setState(old => ({...old, surveyResult: null, error: error.message }))
+  })
+
   useEffect(() => {
     loadSurveyResult.load()
       .then(surveyResult => setState(old => ({...old, surveyResult })))
-      .catch()
+      .catch(handleError)
   }, [])
   return (
     <div className={Styles.surveyResultWrap}>
