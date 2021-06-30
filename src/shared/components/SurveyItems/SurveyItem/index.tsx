@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { SurveyModel } from '@domain/models'
 import { Footer, Calendar } from '@shared/components'
 import Styles from './style.scss'
@@ -16,7 +17,9 @@ const SurveyItem: React.FC<Props> = ({ survey }: Props) => {
           {survey.question}
         </p>
       </div>
-      <Footer/>
+      <footer>
+        <Link data-testid="link" to={`/surveys/${survey.id}`}>Ver Resultado</Link>
+      </footer>
     </li>
   )
 }
