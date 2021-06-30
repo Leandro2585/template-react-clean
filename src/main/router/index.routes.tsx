@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import PrivateRoute from '@main/router/private/Private.routes'
 import { setCurrentAccountAdapter, getCurrentAccountAdapter } from '@main/adapters'
-import { makeLogin, makeSignUp, makeSurveyList } from '@main/factories/pages'
+import { makeLogin, makeSignUp, makeSurveyList, makeSurveyResult } from '@main/factories/pages'
 import { ApiContext } from '@shared/contexts'
 
 const Router: React.FC = () => {
@@ -18,6 +18,7 @@ const Router: React.FC = () => {
           <Route path="/login" component={makeLogin}/>
           <Route path="/signup" component={makeSignUp}/>
           <PrivateRoute path="/" component={makeSurveyList}/>
+          <PrivateRoute path="/surveys/:id" component={makeSurveyResult}/>
         </Switch>
       </BrowserRouter>
     </ApiContext.Provider>
