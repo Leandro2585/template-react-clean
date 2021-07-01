@@ -36,3 +36,4 @@ describe('PrivateRoute', () => {
     expect(history.location.pathname).toBe('/')
   })
 })
+
