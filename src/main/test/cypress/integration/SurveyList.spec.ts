@@ -4,7 +4,7 @@ import * as Http from '../utils/HttpMocks'
 const path = /surveys/
 const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
 const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
-const mockOk = (): void => Http.mockOk(path, 'GET', 'fx:survey-list')
+const mockSuccess = (): void => Http.mockOk(path, 'GET', 'fx:survey-list')
 
 describe('SurveyList', () => {
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('SurveyList', () => {
     mockUnexpectedError()
     cy.visit('')
     cy.getByTestId('error').should('contain.text', 'Something wrong happened. Try again soon.')
-    mockOk()
+    mockSuccess()
     cy.getByTestId('reload').click()
     cy.get('li:not(:empty)').should('have.length', 2)
   })
@@ -49,7 +49,7 @@ describe('SurveyList', () => {
   })
 
   it('should present survey items', () => {
-    mockOk()
+    mockSuccess()
     cy.visit('')
     cy.get('li:empty').should('have.length', 4)
     cy.get('li:not(:empty)').should('have.length', 2)

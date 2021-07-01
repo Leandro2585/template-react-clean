@@ -6,7 +6,7 @@ import * as Helpers from '../utils/Helpers'
 const path = /signup/
 const mockEmailInUseError = (): void => Http.mockForbiddenError(path, 'POST')
 const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
-const mockOk = (): void => Http.mockOk(path, 'POST', 'fx:account')
+const mockSuccess = (): void => Http.mockOk(path, 'POST', 'fx:account')
 
 const populateFields = (): void => {
   cy.getByTestId('name').focus().type(faker.name.findName())
@@ -81,7 +81,7 @@ describe('SignUp', () => {
   })
 
   it('should present save account if valid credentials are provided', () => {
-    mockOk()
+    mockSuccess()
     simulateValidSubmit()
     cy.getByTestId('error-wrap').should('not.have.descendants')
     Helpers.testUrl('/')
@@ -89,7 +89,7 @@ describe('SignUp', () => {
   })
 
   it('should prevent multiple submits', () => {
-    mockOk()
+    mockSuccess()
     populateFields()
     cy.getByTestId('submit').dblclick()
     cy.wait('@request')
@@ -97,7 +97,7 @@ describe('SignUp', () => {
   })
 
   it('should not call submit if form is invalid', () => {
-    mockOk()
+    mockSuccess()
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}')
     Helpers.testHttpCallsCount(0)
   })

@@ -3,6 +3,7 @@ import * as Http from '../utils/HttpMocks'
 
 const path = /surveys/
 const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST')
+const mockSuccess = (): void => Http.mockOk(path, 'GET', 'fx:survey-result')
 
 describe('SurveyResult', () => {
   beforeEach(() => {
@@ -15,5 +16,14 @@ describe('SurveyResult', () => {
     mockUnexpectedError()
     cy.visit('/surveys/any_id')
     cy.getByTestId('error').should('contain.text', 'Something wrong happened. Try again soon.')
+  })
+
+  it('should reload on button click', () => {
+    mockUnexpectedError()
+    cy.visit('/surveys/any_id')
+    cy.getByTestId('error').should('contain.text', 'Something wrong happened. Try again soon.')
+    mockSuccess()
+    cy.getByTestId('reload').click()
+    cy.getByTestId('question').should('exist')
   })
 })
