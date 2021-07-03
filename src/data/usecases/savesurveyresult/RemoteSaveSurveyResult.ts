@@ -15,9 +15,11 @@ export class RemoteSaveSurveyResult implements SaveSurveyResult {
       method: 'put',
       body: params
     })
+    const remoteSurveyResult = httpResponse.body
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
-        return null
+        Object.assign({}, remoteSurveyResult, { date: new Date(remoteSurveyResult.date) })
+        break
       case HttpStatusCode.forbidden:
         throw new AccessDeniedError()
       default:
