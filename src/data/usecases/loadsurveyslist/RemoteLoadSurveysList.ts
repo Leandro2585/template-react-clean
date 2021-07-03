@@ -2,11 +2,12 @@ import { HttpClient, HttpStatusCode } from '@data/protocols/http'
 import { LoadSurveysList } from '@domain/usecases'
 import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { SurveyModel } from '@domain/models'
+import { RemoteSurveyModel } from '@data/models/RemoteSurveyModel'
 
 export class RemoteLoadSurveysList implements LoadSurveysList {
   constructor (
     private readonly url: string,
-    private readonly httpClient: HttpClient<SurveyModel[]>
+    private readonly httpClient: HttpClient<RemoteLoadSurveysList.Model>
   ) {}
 
   async loadAll (): Promise<LoadSurveysList.Model> {
@@ -18,4 +19,8 @@ export class RemoteLoadSurveysList implements LoadSurveysList {
       default: throw new UnexpectedError()
     }
   }
+}
+
+export namespace RemoteLoadSurveysList {
+  export type Model = RemoteSurveyModel[]
 }
