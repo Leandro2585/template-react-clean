@@ -14,7 +14,7 @@ type SutTypes = {
   setCurrentAccountMock(account: AccountModel): void;
 }
 
-const makeSut = (loadSurveyResultSpy =  new LoadSurveyResultSpy()): SutTypes => {
+const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/', '/surveys/any_id'], initialIndex: 1 })
   const setCurrentAccountMock = jest.fn()
   render(
