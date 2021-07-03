@@ -20,18 +20,13 @@ const makeSut = (url = faker.internet.url()): SutTypes => {
 }
 
 describe('RemoteAuthentication', () => {
-  test('should call HttpClient with correct url and method', async () => {
+  test('should call HttpClient with correct values', async () => {
     const url = faker.internet.url()
     const { sut, httpClientSpy } = makeSut(url)
-    await sut.auth(mockAuthentication())
-    expect(httpClientSpy.url).toBe(url)
-    expect(httpClientSpy.method).toBe('post')
-  })
-
-  test('should call HttpClient with correct body', async () => {
-    const { sut, httpClientSpy } = makeSut()
     const authenticationParams = mockAuthentication()
     await sut.auth(authenticationParams)
+    expect(httpClientSpy.url).toBe(url)
+    expect(httpClientSpy.method).toBe('post')
     expect(httpClientSpy.body).toEqual(authenticationParams)
   })
 
