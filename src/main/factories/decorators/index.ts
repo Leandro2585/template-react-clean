@@ -1,1 +1,1 @@
-export * from './AuthorizeHttpGetClientDecoratorFactory'
+export * from './AuthorizeHttpClientDecoratorFactory'
