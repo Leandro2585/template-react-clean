@@ -14,8 +14,8 @@ export class HttpClientSpy<Response = any> implements HttpClient<Response> {
   response: HttpResponse<Response> = {
     statusCode: HttpStatusCode.ok
   };
-  
-  async request(data: HttpRequest): Promise<HttpResponse<Response>> {
+
+  async request (data: HttpRequest): Promise<HttpResponse<Response>> {
     this.url = data.url
     this.method = data.method
     this.body = data.body
@@ -30,4 +30,3 @@ export const mockHttpRequest = (): HttpRequest => ({
   headers: faker.random.objectElement(),
   method: faker.random.arrayElement(['get', 'post', 'put', 'delete'])
 })
-
