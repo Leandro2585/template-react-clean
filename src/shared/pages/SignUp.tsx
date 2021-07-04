@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import { Footer, FormStatus, Input, LoginHeader, SubmitButton } from '@shared/components'
+import { useRecoilState } from 'recoil'
+import { Footer, FormStatus, InputContainer as Input, LoginHeader, SubmitButton } from '@shared/components'
 import { ApiContext, FormContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
 import { AddAccount } from '@domain/usecases'
+import { signUpState } from '@shared/atoms'
 import Styles from '@shared/styles/signup.scss'
 
 type Props = {
@@ -14,19 +16,7 @@ type Props = {
 const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
   const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
-  const [state, setState] = useState({
-    isLoading: false,
-    isFormInvalid: true,
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    nameError: '',
-    emailError: '',
-    passwordError: '',
-    confirmPasswordError: '',
-    mainError: ''
-  })
+  const [state, setState] = useRecoilState(signUpState)
 
   useEffect(() => validate('name'), [state.name])
   useEffect(() => validate('email'), [state.email])
@@ -71,10 +61,10 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
       <FormContext.Provider value={{ state, setState }}>
         <form onSubmit={handleSubmit} data-testid="form" className={Styles.form}>
           <h2>Sign Up</h2>
-          <Input type="text" name="name" placeholder="Digite seu nome" />
-          <Input type="email" name="email" placeholder="Digite seu e-mail" />
-          <Input type="password" name="password" placeholder="Digite sua senha" />
-          <Input type="password" name="confirmPassword" placeholder="Confirme sua senha" />
+          <Input currentState={signUpState} type="text" name="name" placeholder="Digite seu nome" />
+          <Input currentState={signUpState} type="email" name="email" placeholder="Digite seu e-mail" />
+          <Input currentState={signUpState} type="password" name="password" placeholder="Digite sua senha" />
+          <Input currentState={signUpState} type="password" name="confirmPassword" placeholder="Confirme sua senha" />
           <SubmitButton text="Cadastrar"/>
           <Link data-testid="login-link" to="/login" className={Styles.link} replace>Voltar para login</Link>
           <FormStatus/>

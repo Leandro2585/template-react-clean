@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Footer, FormStatus, Input, LoginHeader, SubmitButton } from '@shared/components'
+import { useRecoilState } from 'recoil'
+import { loginState } from '@shared/atoms'
+import { Footer, FormStatus, InputContainer as Input, LoginHeader, SubmitButton } from '@shared/components'
 import { Authentication } from '@domain/usecases'
 import { FormContext, ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
@@ -14,15 +16,7 @@ type Props = {
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
   const { setCurrentAccount } = useContext(ApiContext)
   const history = useHistory()
-  const [state, setState] = useState({
-    isLoading: false,
-    isFormInvalid: true,
-    email: '',
-    password: '',
-    emailError: '',
-    passwordError: '',
-    mainError: ''
-  })
+  const [state, setState] = useRecoilState(loginState)
 
   useEffect(() => validate('email'), [state.email])
   useEffect(() => validate('password'), [state.password])
@@ -62,8 +56,8 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
       <FormContext.Provider value={{ state, setState }}>
         <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
-          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-          <Input type="password" name="password" placeholder="Digite sua senha"/>
+          <Input currentState={loginState} type="email" name="email" placeholder="Digite seu e-mail"/>
+          <Input currentState={loginState} type="password" name="password" placeholder="Digite sua senha"/>
           <SubmitButton text="Entrar"/>
           <Link data-testid="signup-link" to="/signup" className={Styles.link}>Criar conta</Link>
           <FormStatus/>

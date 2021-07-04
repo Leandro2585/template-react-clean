@@ -5,11 +5,7 @@ import { FormContext } from '@shared/contexts'
 import { Input } from '@shared/components'
 
 const makeSut = (fieldName: string): RenderResult => {
-  return render(
-    <FormContext.Provider value={{ state: {} }}>
-      <Input name={fieldName}/>
-    </FormContext.Provider>
-  )
+  return render(<Input name={fieldName} state={{}} setState={null}/>)
 }
 
 describe('Input Component', () => {
