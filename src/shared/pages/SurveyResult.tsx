@@ -54,11 +54,13 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
   }
 
   const { goBack } = useHistory()
+
   useEffect(() => {
     loadSurveyResult.load()
       .then(surveyResult => setState(old => ({ ...old, surveyResult })))
       .catch(handleError)
   }, [state.reload])
+
   return (
     <AnswerContext.Provider value={{ onAnswer }}>
       <div className={Styles.surveyResultWrap}>
