@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import FlipMove from 'react-flip-move'
 import { LoadSurveyResult, SaveSurveyResult } from '@domain/usecases'
 import { Calendar, Header, Loading, Error, Answer } from '@shared/components'
-import Styles from '@shared/styles/surveyresult.scss'
 import { useErrorHandler } from '@shared/hooks'
 import { useHistory } from 'react-router-dom'
 import { AnswerContext } from '@shared/contexts'
-import { SaveSurveyResultSpy } from '@domain/test'
+import Styles from '@shared/styles/surveyresult.scss'
 
 type Props = {
   loadSurveyResult: LoadSurveyResult;
@@ -38,6 +37,9 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
   })
 
   const onAnswer = (answer: string): void => {
+    if (state.isLoading) {
+      return
+    }
     setState(old => ({ ...old, isLoading: true }))
     saveSurveyResult.save({ answer })
       .then(surveyResult => {
