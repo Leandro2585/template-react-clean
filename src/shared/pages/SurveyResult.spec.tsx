@@ -125,20 +125,34 @@ describe('SurveyResult Component', () => {
   test('should not present Loading on active answer click', async () => {
     makeSut()
     await waitFor(() => screen.getByTestId('survey-result'))
-    const answerWrap = screen.queryAllByTestId('answer-wrap')
-    fireEvent.click(answerWrap[0])
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answersWrap[0])
     expect(screen.getByTestId('loading')).not.toBeInTheDocument()
   })
 
   test('should call SaveSurveyResult on non active answer click', async () => {
     const { saveSurveyResultSpy, loadSurveyResultSpy } = makeSut()
     await waitFor(() => screen.getByTestId('survey-result'))
-    const answerWrap = screen.queryAllByTestId('answer-wrap')
-    fireEvent.click(answerWrap[1])
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answersWrap[1])
     expect(screen.getByTestId('loading')).toBeInTheDocument()
     expect(saveSurveyResultSpy.params).toEqual({
       answer: loadSurveyResultSpy.surveyResult.answers[1].answer
     })
     await waitFor(() => screen.getByTestId('survey-result'))
+  })
+
+  test('should render error on UnexpectedError', async () => {
+    const saveSurveyResultSpy = new SaveSurveyResultSpy()
+    const error = new UnexpectedError()
+    jest.spyOn(saveSurveyResultSpy, 'save').mockRejectedValueOnce(error)
+    makeSut({ saveSurveyResultSpy })
+    await waitFor(() => screen.getByTestId('survey-result'))
+    const answerWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answerWrap[1])
+    await waitFor(() => screen.getByTestId('survey-result'))
+    expect(screen.queryByTestId('question')).not.toBeInTheDocument()
+    expect(screen.getByTestId('error')).toHaveTextContent(error.message)
+    expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
   })
 })
