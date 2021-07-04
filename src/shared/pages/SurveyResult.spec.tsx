@@ -194,4 +194,14 @@ describe('SurveyResult Component', () => {
     expect(percents[0]).toHaveTextContent(`${surveyResult.answers[0].percent}%`)
     expect(screen.getByTestId('loading')).not.toBeInTheDocument()
   })
+
+  test('should prevent multiple answer click', async () => {
+    const { saveSurveyResultSpy } = makeSut()
+    await waitFor(() => screen.getByTestId('survey-result'))
+    const answersWrap = screen.queryAllByTestId('answer-wrap')
+    fireEvent.click(answersWrap[1])
+    fireEvent.click(answersWrap[1])
+    await waitFor(() => screen.getByTestId('survey-result'))
+    expect(saveSurveyResultSpy.callsCount).toBe(1)
+  })
 })

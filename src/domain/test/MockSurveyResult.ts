@@ -28,10 +28,12 @@ export class LoadSurveyResultSpy implements LoadSurveyResult {
 }
 
 export class SaveSurveyResultSpy implements SaveSurveyResult {
-  params: SaveSurveyResult.Params;
+  callsCount = 0;
   surveyResult: any;
+  params: SaveSurveyResult.Params;
 
   async save (params: SaveSurveyResult.Params): Promise<SaveSurveyResult.Model> {
+    this.callsCount++
     this.params = params
     return this.surveyResult
   }
