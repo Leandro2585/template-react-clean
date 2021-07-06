@@ -7,10 +7,10 @@ import { RemoteSurveyModel } from '@data/models/RemoteSurveyModel'
 export class RemoteLoadSurveysList implements LoadSurveysList {
   constructor (
     private readonly url: string,
-    private readonly httpClient: HttpClient<RemoteLoadSurveysList.Model>
+    private readonly httpClient: HttpClient<RemoteLoadSurveysList.Model[]>
   ) {}
 
-  async loadAll (): Promise<LoadSurveysList.Model> {
+  async loadAll (): Promise<LoadSurveysList.Model[]> {
     const httpResponse = await this.httpClient.request({ url: this.url, method: 'get' })
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok: return httpResponse.body
@@ -22,5 +22,5 @@ export class RemoteLoadSurveysList implements LoadSurveysList {
 }
 
 export namespace RemoteLoadSurveysList {
-  export type Model = RemoteSurveyModel[]
+  export type Model = RemoteSurveyModel
 }

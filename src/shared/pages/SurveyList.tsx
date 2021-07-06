@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 import { LoadSurveysList } from '@domain/usecases'
-import { SurveyModel } from '@domain/models'
 import { useErrorHandler } from '@shared/hooks'
 import { Header, SurveyListItem, Error } from '@shared/components'
+import { surveyListState } from '@shared/atoms'
 import Styles from '@shared/styles/surveylist.scss'
 
 type Props = {
@@ -13,11 +14,7 @@ const SurveyList: React.FC<Props> = ({ loadSurveysList }: Props) => {
   const handleError = useErrorHandler((error: Error) => {
     setState(old => ({ ...old, error: error.message }))
   })
-  const [state, setState] = useState({
-    surveys: [] as SurveyModel[],
-    reload: false,
-    error: ''
-  })
+  const [state, setState] = useRecoilState(surveyListState)
 
   const reload = (): void => {
     setState(old => ({
@@ -28,7 +25,7 @@ const SurveyList: React.FC<Props> = ({ loadSurveysList }: Props) => {
   }
   useEffect(() => {
     loadSurveysList.loadAll()
-      .then(surveys => setState(old => ({ ...old, surveys })))
+      .then(surveys => setState((old) => ({ ...old, surveys })))
       .catch(handleError)
   }, [state.reload])
 
