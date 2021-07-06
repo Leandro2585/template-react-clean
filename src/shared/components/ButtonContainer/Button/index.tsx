@@ -3,10 +3,10 @@ import { FormContext } from '@shared/contexts'
 
 type Props = {
   text: string;
+  state: any;
 }
 
-const SubmitButton: React.FC<Props> = ({ text }: Props) => {
-  const { state } = useContext(FormContext)
+const Button: React.FC<Props> = ({ text, state }: Props) => {
   return (
     <button
       disabled={state.isFormInvalid}
@@ -17,4 +17,4 @@ const SubmitButton: React.FC<Props> = ({ text }: Props) => {
   )
 }
 
-export default SubmitButton
+export default Button
