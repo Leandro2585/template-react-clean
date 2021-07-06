@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { loginState } from '@shared/atoms'
-import { Footer, FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
+import { Footer, FormStatusWrapper as FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
 import { Authentication } from '@domain/usecases'
 import { FormContext, ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
@@ -60,7 +60,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
           <Input currentState={loginState} type="password" name="password" placeholder="Digite sua senha"/>
           <Button currentState={loginState} text="Entrar"/>
           <Link data-testid="signup-link" to="/signup" className={Styles.link}>Criar conta</Link>
-          <FormStatus/>
+          <FormStatus currentState={loginState} />
         </form>
       </FormContext.Provider>
       <Footer/>

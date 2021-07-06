@@ -3,8 +3,11 @@ import { Spinner } from '@shared/components'
 import { FormContext } from '@shared/contexts'
 import Styles from './style.scss'
 
-const FormStatus: React.FC = () => {
-  const { state } = useContext(FormContext)
+type Props = {
+  state: any;
+}
+
+const FormStatus: React.FC<Props> = ({ state }: Props) => {
   const { isLoading, mainError } = state
   return (
     <div data-testid="error-wrap" className={Styles.errorWrap}>
