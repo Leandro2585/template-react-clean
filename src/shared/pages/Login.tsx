@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil'
 import { loginState } from '@shared/atoms'
 import { Footer, FormStatusWrapper as FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
 import { Authentication } from '@domain/usecases'
-import { FormContext, ApiContext } from '@shared/contexts'
+import { ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
 import Styles from '@shared/styles/login.scss'
 
@@ -53,7 +53,6 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
   return (
     <div className={Styles.loginWrap}>
       <LoginHeader/>
-      <FormContext.Provider value={{ state, setState }}>
         <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <Input currentState={loginState} type="email" name="email" placeholder="Digite seu e-mail"/>
@@ -62,7 +61,6 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
           <Link data-testid="signup-link" to="/signup" className={Styles.link}>Criar conta</Link>
           <FormStatus currentState={loginState} />
         </form>
-      </FormContext.Provider>
       <Footer/>
     </div>
   )

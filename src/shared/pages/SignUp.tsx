@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { Footer, FormStatusWrapper as FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
-import { ApiContext, FormContext } from '@shared/contexts'
+import { ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
 import { AddAccount } from '@domain/usecases'
 import { signUpState } from '@shared/atoms'
@@ -58,7 +58,6 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
   return (
     <div className={Styles.signupWrap}>
       <LoginHeader/>
-      <FormContext.Provider value={{ state, setState }}>
         <form onSubmit={handleSubmit} data-testid="form" className={Styles.form}>
           <h2>Sign Up</h2>
           <Input currentState={signUpState} type="text" name="name" placeholder="Digite seu nome" />
@@ -69,7 +68,6 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
           <Link data-testid="login-link" to="/login" className={Styles.link} replace>Voltar para login</Link>
           <FormStatus currentState={signUpState}/>
         </form>
-      </FormContext.Provider>
       <Footer/>
     </div>
   )
