@@ -1,4 +1,5 @@
 import React from 'react'
+import { RecoilRoot } from 'recoil'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
@@ -8,7 +9,6 @@ import { mockAccountModel, mockSurveysListModel } from '@domain/test'
 import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { ApiContext } from '@shared/contexts'
 import { AccountModel } from '@domain/models'
-import { RecoilRoot } from 'recoil'
 
 class LoadSurveysListSpy implements LoadSurveysList {
   callsCount = 0

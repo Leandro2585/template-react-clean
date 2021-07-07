@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { SurveyResultAnswerModel } from '@domain/models'
-import { AnswerContext } from '@shared/contexts'
 import Styles from './style.scss'
+import { onSurveyAnswerState } from '@shared/atoms'
+import { useRecoilValue } from 'recoil'
 
 type Props = {
   answer: SurveyResultAnswerModel;
 }
 
 const Answer: React.FC<Props> = ({ answer }: Props) => {
-  const { onAnswer } = useContext(AnswerContext)
+  const { onAnswer } = useRecoilValue(onSurveyAnswerState)
 
   const handleAnswerClick = (event: React.MouseEvent): void => {
     if (event.currentTarget.classList.contains(Styles.active)) {

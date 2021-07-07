@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import FlipMove from 'react-flip-move'
+import { useHistory } from 'react-router-dom'
 import { LoadSurveyResult, SaveSurveyResult } from '@domain/usecases'
 import { Calendar, Header, Loading, Error, Answer } from '@shared/components'
 import { useErrorHandler } from '@shared/hooks'
-import { useHistory } from 'react-router-dom'
-import { AnswerContext } from '@shared/contexts'
+import { surveyResultState, onSurveyAnswerState } from '@shared/atoms'
 import Styles from '@shared/styles/surveyresult.scss'
 
 type Props = {
@@ -12,20 +13,9 @@ type Props = {
   saveSurveyResult: SaveSurveyResult;
 }
 
-type State = {
-  isLoading: boolean;
-  error: string;
-  reload: boolean;
-  surveyResult: LoadSurveyResult.Model;
-}
-
 const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: Props) => {
-  const [state, setState] = useState<State>({
-    isLoading: false,
-    error: '',
-    reload: false,
-    surveyResult: null as LoadSurveyResult.Model
-  })
+  const [state, setState] = useRecoilState(surveyResultState)
+  const setOnAnswer = useSetRecoilState(onSurveyAnswerState)
 
   const handleError = useErrorHandler((error: Error) => {
     setState(old => ({
@@ -60,13 +50,16 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
   const { goBack } = useHistory()
 
   useEffect(() => {
+    setOnAnswer({ onAnswer })
+  }, [])
+
+  useEffect(() => {
     loadSurveyResult.load()
       .then(surveyResult => setState(old => ({ ...old, surveyResult })))
       .catch(handleError)
   }, [state.reload])
 
   return (
-    <AnswerContext.Provider value={{ onAnswer }}>
       <div className={Styles.surveyResultWrap}>
         <Header/>
         <div data-testid="survey-result" className={Styles.contentWrap}>
@@ -85,7 +78,6 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
         </>}
         </div>
       </div>
-    </AnswerContext.Provider>
   )
 }
 
