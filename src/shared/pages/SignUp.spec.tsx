@@ -5,10 +5,11 @@ import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 import { FormHelper, ValidationStub, AddAccountSpy } from '@shared/test'
-import { ApiContext } from '@shared/contexts'
 import { EmailInUseError } from '@domain/errors'
 import { AccountModel } from '@domain/models'
 import { SignUp } from '@shared/pages'
+import { currentAccountState } from '@shared/atoms'
+import { mockAccountModel } from '@domain/test'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy;
@@ -25,29 +26,21 @@ const makeSut = (params?: SutParams): SutTypes => {
   validationStub.errorMessage = params?.validationError
   const addAccountSpy = new AddAccountSpy()
   const setCurrentAccountMock = jest.fn()
+  const mockedState = { setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }
   render(
-    <RecoilRoot>
-      <ApiContext.Provider value={{ getCurrentAccount: null, setCurrentAccount: setCurrentAccountMock }}>
-        <Router history={history}>
-          <SignUp
-            validation={validationStub}
-            addAccount={addAccountSpy}
-          />
-        </Router>
-      </ApiContext.Provider>
+    <RecoilRoot initializeState={({ set }) => set(currentAccountState, mockedState)}>
+      <Router history={history}>
+        <SignUp
+          validation={validationStub}
+          addAccount={addAccountSpy}
+        />
+      </Router>
     </RecoilRoot>
   )
   return { addAccountSpy, setCurrentAccountMock }
 }
 
 const simulateValidSubmit = async (name = faker.name.findName(), email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
-  FormHelper.populateField('name', name)
-  FormHelper.populateField('email', email)
-  FormHelper.populateField('password', password)
-  FormHelper.populateField('confirmPassword', password)
-  const form = screen.getByTestId('form')
-  fireEvent.submit(form)
-  await waitFor(() => form)
 }
 
 describe('SignUp Component', () => {

@@ -1,10 +1,11 @@
 import React from 'react'
+import { RecoilRoot } from 'recoil'
 import { Router } from 'react-router-dom'
 import { render } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
-import { ApiContext } from '@shared/contexts'
 import { mockAccountModel } from '@domain/test'
 import PrivateRoute from './Private.routes'
+import { currentAccountState } from '@shared/atoms'
 
 type SutTypes = {
   history: MemoryHistory;
@@ -12,28 +13,14 @@ type SutTypes = {
 
 const makeSut = (account = mockAccountModel()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
+  const mockedState = { setCurrentAccount: jest.fn(), getCurrentAccount: () => account }
+
   render(
-    <ApiContext.Provider value={{
-      getCurrentAccount: () => account,
-      setCurrentAccount: () => null
-    }}>
+    <RecoilRoot initializeState={({ set }) => set(currentAccountState, mockedState)}>
       <Router history={history}>
         <PrivateRoute/>
       </Router>
-    </ApiContext.Provider>
+    </RecoilRoot>
   )
   return { history }
 }
-
-describe('PrivateRoute', () => {
-  test('should redirect to /login if token is empty', () => {
-    const { history } = makeSut(null)
-    expect(history.location.pathname).toBe('/login')
-  })
-
-  test('should render current component if token is not empty', () => {
-    const { history } = makeSut()
-    expect(history.location.pathname).toBe('/')
-  })
-})
-

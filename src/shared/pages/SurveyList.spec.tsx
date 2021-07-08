@@ -7,8 +7,8 @@ import { SurveyList } from '@shared/pages'
 import { LoadSurveysList } from '@domain/usecases'
 import { mockAccountModel, mockSurveysListModel } from '@domain/test'
 import { AccessDeniedError, UnexpectedError } from '@domain/errors'
-import { ApiContext } from '@shared/contexts'
 import { AccountModel } from '@domain/models'
+import { currentAccountState } from '@shared/atoms'
 
 class LoadSurveysListSpy implements LoadSurveysList {
   callsCount = 0
@@ -29,13 +29,13 @@ type SutTypes = {
 const makeSut = (loadSurveysListSpy = new LoadSurveysListSpy()): SutTypes => {
   const history = createMemoryHistory({ initialEntries: ['/'] })
   const setCurrentAccountMock = jest.fn()
+  const mockedState = { setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }
+
   render(
-    <RecoilRoot>
-      <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
-        <Router history={history}>
-          <SurveyList loadSurveysList={loadSurveysListSpy}/>
-        </Router>
-      </ApiContext.Provider>
+    <RecoilRoot initializeState={({ set }) => set(currentAccountState, mockedState)}>
+      <Router history={history}>
+        <SurveyList loadSurveysList={loadSurveysListSpy}/>
+      </Router>
     </RecoilRoot>
   )
   return {

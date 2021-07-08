@@ -1,11 +1,10 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { Footer, FormStatusWrapper as FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
-import { ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
 import { AddAccount } from '@domain/usecases'
-import { signUpState } from '@shared/atoms'
+import { currentAccountState, signUpState } from '@shared/atoms'
 import Styles from '@shared/styles/signup.scss'
 
 type Props = {
@@ -14,7 +13,7 @@ type Props = {
 }
 
 const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
-  const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
   const [state, setState] = useRecoilState(signUpState)
 

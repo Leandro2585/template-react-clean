@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
-import { loginState } from '@shared/atoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { currentAccountState, loginState } from '@shared/atoms'
 import { Footer, FormStatusWrapper as FormStatus, InputContainer as Input, LoginHeader, ButtonContainer as Button } from '@shared/components'
 import { Authentication } from '@domain/usecases'
-import { ApiContext } from '@shared/contexts'
 import { Validation } from '@shared/protocols'
 import Styles from '@shared/styles/login.scss'
 
@@ -14,7 +13,7 @@ type Props = {
 }
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
-  const { setCurrentAccount } = useContext(ApiContext)
+  const { setCurrentAccount } = useRecoilValue(currentAccountState)
   const history = useHistory()
   const [state, setState] = useRecoilState(loginState)
 
