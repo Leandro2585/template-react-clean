@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom'
 import { render } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { mockAccountModel } from '@tests/domain/mocks'
-import PrivateRoute from './Private.routes'
+import { PrivateRoute } from '@main/router/private'
 import { currentAccountState } from '@shared/atoms'
 
 type SutTypes = {
