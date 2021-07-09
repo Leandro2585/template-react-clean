@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "outDir": "./build",
     "jsx": "react",
-    "rootDir": ".",
+    "rootDirs": ["src", "__tests__"],
     "baseUrl": "./src",
     "paths": {
       "@domain/*": ["domain/*"],
@@ -19,13 +19,15 @@
       "@infra/*": ["infra/*"],
       "@main/*": ["main/*"],
       "@shared/*": ["shared/*"],
-      "@validation/*": ["validation/*"]
+      "@validation/*": ["validation/*"],
+      "@tests/*": ["../tests/*"]
     },
     "allowJs": true,
     "resolveJsonModule": true
   },
   "include": [
     "src",
+    "tests",
     "node_modules/jest-dom"
   ],
   "exclude": [

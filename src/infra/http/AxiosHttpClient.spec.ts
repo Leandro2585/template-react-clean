@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { mockAxios, mockHttpResponse } from '@infra/test/MockAxios'
-import { mockHttpRequest } from '@data/test'
+import { mockHttpRequest } from '../__tests__/data/mocks'
 import { AxiosHttpClient } from './AxiosHttpClient'
 
 jest.mock('axios')
@@ -21,9 +21,9 @@ describe('AxiosHttpClient', () => {
     const { sut, mockedAxios } = makeSut()
     await sut.request(request)
     expect(mockedAxios.request).toHaveBeenCalledWith({
-      url: request.url, 
+      url: request.url,
       data: request.body,
-      headers: request.headers, 
+      headers: request.headers,
       method: request.method
     })
   })
