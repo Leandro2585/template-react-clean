@@ -5,11 +5,11 @@ import { RecoilRoot } from 'recoil'
 import { createMemoryHistory } from 'history'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { InvalidCredentialsError } from '@domain/errors'
-import { AuthenticationSpy, ValidationStub, FormHelper } from '@shared/test'
 import { Login } from '@shared/pages'
 import { AccountModel } from '@domain/models'
 import { currentAccountState } from '@shared/atoms'
 import { mockAccountModel } from '@tests/domain/mocks'
+import { AuthenticationSpy, ValidationStub, FormHelper } from '@tests/shared/mocks'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy;
