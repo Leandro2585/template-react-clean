@@ -2,7 +2,7 @@ import React from 'react'
 import { Router } from 'react-router-dom'
 import { MemoryHistory, createMemoryHistory } from 'history'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { mockSurveyModel } from '@domain/test'
+import { mockSurveyModel } from '@tests/domain/mocks'
 import { SurveyItem } from '@shared/components'
 
 type SutTypes = {

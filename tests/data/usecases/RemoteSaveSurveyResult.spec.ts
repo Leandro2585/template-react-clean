@@ -1,6 +1,6 @@
 import faker from 'faker'
-import { RemoteSaveSurveyResult } from '@data/usecases/savesurveyresult/RemoteSaveSurveyResult'
-import { mockSaveSurveyResultParams } from '@domain/test'
+import { RemoteSaveSurveyResult } from '@data/usecases/RemoteSaveSurveyResult'
+import { mockSaveSurveyResultParams } from '@tests/domain/mocks'
 import { HttpStatusCode } from '@data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { HttpClientSpy, mockRemoteSurveyResultModel } from '@tests/data/mocks'

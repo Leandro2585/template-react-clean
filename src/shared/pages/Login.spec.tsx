@@ -9,7 +9,7 @@ import { AuthenticationSpy, ValidationStub, FormHelper } from '@shared/test'
 import { Login } from '@shared/pages'
 import { AccountModel } from '@domain/models'
 import { currentAccountState } from '@shared/atoms'
-import { mockAccountModel } from '@domain/test'
+import { mockAccountModel } from '@tests/domain/mocks'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy;

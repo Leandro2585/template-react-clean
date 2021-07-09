@@ -4,7 +4,7 @@ import { fireEvent, screen, render } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { AccountModel } from '@domain/models'
 import { Header } from '@shared/components'
-import { mockAccountModel } from '@domain/test'
+import { mockAccountModel } from '@tests/domain/mocks'
 import { RecoilRoot } from 'recoil'
 import { currentAccountState } from '@shared/atoms'
 

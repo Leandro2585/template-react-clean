@@ -1,8 +1,8 @@
 import faker from 'faker'
 import { HttpStatusCode } from '@data/protocols/http'
 import { InvalidCredentialsError, UnexpectedError } from '@domain/errors'
-import { RemoteAuthentication } from '@data/usecases/authentication/RemoteAuthentication'
-import { mockAccountModel, mockAuthentication } from '@domain/test'
+import { RemoteAuthentication } from '@data/usecases/RemoteAuthentication'
+import { mockAccountModel, mockAuthentication } from '@tests/domain/mocks'
 import { HttpClientSpy } from '@tests/data/mocks'
 
 type SutTypes = {

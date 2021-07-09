@@ -9,7 +9,7 @@ import { EmailInUseError } from '@domain/errors'
 import { AccountModel } from '@domain/models'
 import { SignUp } from '@shared/pages'
 import { currentAccountState } from '@shared/atoms'
-import { mockAccountModel } from '@domain/test'
+import { mockAccountModel } from '@tests/domain/mocks'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy;

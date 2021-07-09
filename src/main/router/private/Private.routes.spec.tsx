@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil'
 import { Router } from 'react-router-dom'
 import { render } from '@testing-library/react'
 import { createMemoryHistory, MemoryHistory } from 'history'
-import { mockAccountModel } from '@domain/test'
+import { mockAccountModel } from '@tests/domain/mocks'
 import PrivateRoute from './Private.routes'
 import { currentAccountState } from '@shared/atoms'
 

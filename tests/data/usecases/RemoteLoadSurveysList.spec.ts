@@ -2,8 +2,8 @@ import faker from 'faker'
 import { HttpStatusCode } from '@data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@domain/errors'
 import { SurveyModel } from '@domain/models'
-import { mockSurveysListModel } from '@domain/test'
-import { RemoteLoadSurveysList } from '@data/usecases/loadsurveyslist/RemoteLoadSurveysList'
+import { mockSurveysListModel } from '@tests/domain/mocks'
+import { RemoteLoadSurveysList } from '@data/usecases/RemoteLoadSurveysList'
 import { HttpClientSpy } from '@tests/data/mocks'
 
 type SutTypes = {
