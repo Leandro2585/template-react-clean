@@ -1,4 +1,4 @@
-import { RemoteAddAccount } from '@data/usecases/addaccount/RemoteAddAccount'
+import { RemoteAddAccount } from '@data/usecases/RemoteAddAccount'
 import { AddAccount } from '@domain/usecases'
 import { makeApiUrl, makeAxiosHttpClient } from '../http'
 

@@ -5,7 +5,7 @@ import Styles from './style.scss'
 import { LoadSurveysList } from '@domain/usecases'
 
 type Props = {
-  surveys: LoadSurveysList.Model;
+  surveys: LoadSurveysList.Model[];
 }
 
 const SurveyListItem: React.FC<Props> = ({ surveys }: Props) => {
